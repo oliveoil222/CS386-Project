@@ -1,6 +1,6 @@
 # Project Inception
 
-Group 06 – “TBD”\
+Group __ – “_____”\
 Date and location:  Jan 26, 2024 Cline Room# 183\
 Group Members: Olivia V, Hannah P, Dallon J, Charles D, Sam C, Jared K
 
