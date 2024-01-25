@@ -32,5 +32,5 @@ Note: Debug mode will reload on py file changes, great for developing in real ti
 - Hannah P. [hannahpenado](https://github.com/hannahpenado)
 - Charles D. [cmd644](https://github.com/cmd644)
 - Dallon J. [dallonjarman](https://github.com/dallonjarman)
-- Sam C. [GH Username](https://github.com)
-- Jared K. [GH Username](https://github.com/)
+- Sam C. [SamCain04](https://github.com/SamCain04)
+- Jared K. [jjkagie](https://github.com/jjkagie)
