@@ -7,7 +7,7 @@ Help Desk Ticketing Project for Spring CS 386
 ---
 ## Development Environment Setup
 1. Fork the GitHub Group Project Repository
-2. Clone your Fork using ```git clone https://github.com/oliveoil222/CS386-Project.git```
+2. Clone your Fork using ```git clone https://github.com/YOUR_GITHUB_USERNAME_HERE/CS386-Project.git```
 3. ```cd CS386-Project```
 4. Linux/MacOS: ```python -m venv .venv```
 On Linux, you will need the python#.##-full package and/or python-is-python3 in order to setup dev environment.
