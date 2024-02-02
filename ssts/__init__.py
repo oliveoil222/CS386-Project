@@ -16,6 +16,8 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'ssts.mongodb'),
     )
 
+
+
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -45,5 +47,13 @@ def create_app(test_config=None):
     @app.route('/sp/schedule')
     def service_portal_schedule(page_name="Service Portal Scheduler"):
         return render_template("service_portal/schedule.html", page_name=page_name)
+
+    @app.route('/new/ticket')
+    def new_ticket(page_name="New Ticket"):
+        return render_template("new/ticket.html", page_name=page_name)
+
+    @app.route('/view/ticket/[ID_NUMBER]')
+    def new_ticket(page_name="View Ticket"):
+        return render_template("view/ticket/[ID_NUMBER].html", page_name=page_name)
 
     return app
