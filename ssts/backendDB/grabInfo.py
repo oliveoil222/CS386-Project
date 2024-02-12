@@ -1,6 +1,6 @@
 # import libraries
 import pymongo
-from pymongo_get_database import get_database
+import createDatabases
 
 # this will be the file that has all the functions for grabbing information from the
 # mongo databases that can be passed back to mid
@@ -12,6 +12,7 @@ client =  pymongo.MongoClient('server url') # keep empty for now
 
 # connect to help desk ticket database
 db = client['Ticket Tracker']
+
 # connect collections
     # connect a tickets collection
 ticket_collection = db['Tickets']
