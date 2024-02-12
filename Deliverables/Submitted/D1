@@ -1,13 +1,7 @@
-	Super Simple Ticketing System’s goals are to be easy for the user to interact with 
-and learn how to use, be fast compared to other competitors, and service 
-both the workers and the clients by providing both sides with information. 
-The system aims to be extremely user friendly for both clients and workers while not 
-eliminating important features for a simpler UI.  
+	Super Simple Ticketing System’s goals are to be easy for the user to interact with and learn how to use, be fast compared to other competitors, and service both the workers and the clients by providing both sides with information. The system aims to be extremely user friendly for both clients and workers while not eliminating important features for a simpler UI.  
 
 Initial Value Proposition:
-	We will provide the technology services team with the tools to successfully help 
-their clients, while providing an application that allows for faster service, and simpler 
-information tracking.
+	We will provide the technology services team with the tools to successfully help their clients, while providing an application that allows for faster service, and simpler information tracking.
 
 Interviews:
 Interview 1:
@@ -33,8 +27,7 @@ February 11th, 2024
 Customer segment
 Support Agent
 Key insights from the interview
-Searching is quite important, especially with keywords, having good technical documentation, and dashboards for 
-different types of people.
+Searching is quite important, especially with keywords, having good technical documentation, and dashboards for different types of people.
 Representative quotes
 None
 Assessment: Nice to have
@@ -151,11 +144,9 @@ February 11, 2024
 Customer segment
 Support agent
 Key insights from the interview
-Having a knowledge base that allows new employees the ability to quickly and effectively look up new 
-information and follow it step by step without having prior knowledge is crucial
+Having a knowledge base that allows new employees the ability to quickly and effectively look up new information and follow it step by step without having prior knowledge is crucial
 Representative quotes
-“It’s a necessity to have a variety of Knowledge-Based articles to assist the customer and 
-employee with their issues.”
+“It’s a necessity to have a variety of Knowledge-Based articles to assist the customer and employee with their issues.”
 Assessment: Must have / Nice to have / Don’t care (how the interviewee sees the solution)
 Must-have: Knowledge-base
 Nice-have: Have phone numbers be logged within the ticketing system
@@ -184,6 +175,4 @@ Help Line: must have
 
 
 Final Value Proposition: 
-	We will provide the technology services team with the tools to successfully help their clients,
-while providing an application that emphasizes a speedier service than competitors, and simpler information 
-tracking that provides easy navigation to all users all while also staying up to date.
+	We will provide the technology services team with the tools to successfully help their clients, while providing an application that emphasizes a speedier service than competitors, and simpler information tracking that provides easy navigation to all users all while also staying up to date.
