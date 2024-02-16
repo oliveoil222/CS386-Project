@@ -49,6 +49,10 @@ def create_app(test_config=None):
     @app.route('/login')
     def agent_login_page(page_name="Agent Login"):
         return render_template("auth/login.html", page_name=page_name)
+    
+    @app.route('/signup')
+    def agent_signup_page(page_name="Agent Signup"):
+        return render_template("auth/signup.html", page_name=page_name)
 
     @app.route('/service')
     def service_portal(page_name="Service Portal"):

@@ -1,0 +1,57 @@
+body {
+    font-family: sans-serif;
+    
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  section {
+
+    border: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+
+.filters,
+.search-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filters label,
+.search-filter label {
+  margin-right: 10px;
+}
+
+.ticket-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ticket-list li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.additional-resources ul {
+  list-style: none;
+  padding: 0;
+}
+
+.additional-resources li {
+  margin-bottom: 10px;
+}
+
+.additional-resources a {
+  text-decoration: none;
+  color: #007bff;
+}
