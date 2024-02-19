@@ -123,7 +123,7 @@ Our minimum viable product would be a ticketing system where users can add ticke
 ## 6. Use cases
 
 ### 6.1. Use case diagram
-**![Use case diagram](/Deliverables/img/Use%20case%20diagram.png)
+**![Use case diagram](/Deliverables/img/Use%20Case%20Diagram.png)
 
 ### 6.2. Use case description
 
@@ -230,7 +230,7 @@ Olivia:
     3. Priority Level: 8
     4. Hours Spent Estimate: 20 hours
 
-![Olivia's Diagram](/Deliverables/img/OliviaDiagram.png)
+![Olivia's Diagram](/Deliverables/img/OlivaDiagram.jpg)
 
 
 Sam:
@@ -279,7 +279,7 @@ Hannah:
 2. As a user, I want to understand how to be able to see the progress on my ticket, so I know what is being done to fix it.
     3. Priority Level: 3
     4. Hours Spend Estimate: 100 hours
-![Hannah's Diagram](/Deliverables/img/HannahDiagram.png)
+![Hannah's Diagram](/Deliverables/img/Hannah%20Diagram.png)
 
 
 
