@@ -1,5 +1,5 @@
 # Requirements
-_Group 10 - "[Super Simple Ticketing System]"\
+_Group 10 - "Super Simple Ticketing System"\
 Date and location: Feb 16, 2024\
 Group Members: Olivia Vester, Dallon Jarman, Charles Descamps, Hannah Penado, Sam Cain, Jared Kaige_
 
@@ -139,7 +139,7 @@ Olivia:\
 **Alternative Flows**:
 1. The ticket request is too broad to be filled
 2. The user must resubmit their request
-
+![Olivia's Diagram](/Deliverables/img/OliviaDiagram.png)
 
 
 Charles:\
@@ -166,7 +166,7 @@ Sam:\
 1. Employee has too many tickets sent to them, can't assign
 2. Employee does not exist, can't assign
 
-Dallon: 
+Dallon:\
 **Use case**: IT employee signs into the web application\
 **Actor**: IT employee\
 **Trigger**: The IT employee wants to sign into their account to access their tickets\
@@ -180,7 +180,7 @@ Dallon:
 2. The app prompts the user to enter the correct password.
 
 
-Hannah: 
+Hannah:\
 **Use case**: Update ticket progress\
 **Actor**: IT employee\
 **Trigger**: The IT employee updates the progress on a ticket.\
@@ -195,6 +195,7 @@ Hannah:
 1. The application rejects the update request for incomplete information
 2. The application informs the user of the incomplete info error
 3. The application asks the user to input additional information. 
+![Hannah's Diagram](/Deliverables/img/Hannah%20Diagram.png)
 
 Jared:\
 **Use Case**: User searches for specific ticket\
@@ -211,6 +212,7 @@ Jared:\
 1. System finds that user does not have access to the ticket
 2. System informs the user of an error
 3. System prompts the user to try again
+![Jared's Diagram](/Deliverables/img/JaredDiagram.png)
 
 
 
@@ -229,8 +231,6 @@ Olivia:
 2. As an employee, I want to be able to examine quickly and efficiently, so that I can maximize problem solving time.
     3. Priority Level: 8
     4. Hours Spent Estimate: 20 hours
-
-![Olivia's Diagram](/Deliverables/img/OlivaDiagram.jpg)
 
 
 Sam:
@@ -271,6 +271,7 @@ Jared:
     3. Priority Level: 4
     4. Time Estimate: 40 hours
 
+
 Hannah:
 
 1. As an employee, I want to feel accomplished when I complete a ticket, so I can feel more motivated to complete them
@@ -279,7 +280,7 @@ Hannah:
 2. As a user, I want to understand how to be able to see the progress on my ticket, so I know what is being done to fix it.
     3. Priority Level: 3
     4. Hours Spend Estimate: 100 hours
-![Hannah's Diagram](/Deliverables/img/Hannah%20Diagram.png)
+
 
 
 
