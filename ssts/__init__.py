@@ -6,6 +6,8 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from markupsafe import escape
+#import grabInfo
+#import addInfo
 
 
 def create_app(test_config=None):
@@ -21,7 +23,12 @@ def create_app(test_config=None):
         # do database stuff we expect to work here
         # like pulling last ID number
         # if this errors, then move to except
+        raise ValueError()
         print("working database stuff here")
+        
+        # use the get_ticket_collection function
+        # if empty, throw error
+        # otherwise, get the last ticket from the list.
     except:
         id_number = "001"
         # then this is where we set the first ID number for initialization
@@ -54,7 +61,7 @@ def create_app(test_config=None):
     def agent_signup_page(page_name="Agent Signup"):
         return render_template("auth/signup.html", page_name=page_name)
 
-    @app.route('/service')
+    @app.route('/sp')
     def service_portal(page_name="Service Portal"):
         return render_template("service_portal/portal.html", page_name=page_name)
 
@@ -71,7 +78,7 @@ def create_app(test_config=None):
         return render_template("new/ticket.html", page_name=page_name ) #, id_number=id_number)
 
     @app.route('/new/ticket', methods=['GET','POST'])
-    def new_ticket(page_name="New Ticket {id_number}"):
+    def new_ticket(id_number=id_number, page_name="New Ticket {id_number}"):
         # will need to save the DB information from the webpage
         # probably using an API request template once the submit button was hit.
         # will need to get the information from front-end about what information
@@ -81,6 +88,27 @@ def create_app(test_config=None):
 
         # if POST is used, then grab the information from the webpage and then
         # use DB functions to then make and store the information.
+        if request.method == 'POST':
+            # grab information given by frontend, like
+            # description
+            ticket_descript = str(request.form.get('description'))
+            # title
+            ticket_title = str(request.form.get('title'))
+            # type
+            ticket_type = str(request.form.get('type'))
+            # worker
+            ticket_worker = str(request.form.get('worker'))
+            # device
+            ticket_device = str(request.form.get('device'))
+            # client
+            ticket_client = str(request.form.get('client'))
+            # team
+            ticket_team = str(request.form.get('team'))
+            print(f"POST Request completed here! {ticket_descript, ticket_title, ticket_type, ticket_worker, ticket_device, ticket_client, ticket_team}")
+            # use the add_ticket function with all the referenced parameters
+            # add_ticket(id_number, description, title, type, worker, device, client, team)
+            # increment ID number
+            id_number = str(int(id_number) + 1).zfill(3)
 
         # otherwise, when GET is used, just render the new ticket html template
 
