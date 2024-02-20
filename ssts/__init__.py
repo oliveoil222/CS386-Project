@@ -112,4 +112,9 @@ def create_app(test_config=None):
 
         return render_template("view/ticket/{id_number}.html", page_name=page_name)
 
+    
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('/error/404.html'), 404
+
     return app
