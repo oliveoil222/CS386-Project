@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Ticket</title>
+</head>
+<body>
+    <h1>New Ticket</h1>
+    <p>Page Number: <span id="page_number">{{ id_number }}</span></p>
+    <button id="increment_button" onclick="incrementPageNumber()">Increment Page Number</button>
+    <script>
+        // Function to increment the page number and redirect to the new page
+        function incrementPageNumber() {
+            var pageNumber = parseInt(document.getElementById("page_number").innerText);
+            pageNumber++;
+            document.getElementById("page_number").innerText = pageNumber;
+            // Redirect to the new page
+            window.location.href = "/new/ticket" + pageNumber.toString().padStart(3, '0');
+        }
+    </script>
+</body>
+</html>
