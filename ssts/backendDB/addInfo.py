@@ -5,7 +5,11 @@ from pymongo.server_api import ServerApi
 
 # Create a new client and connect to the server
 def connect_to_client():
+<<<<<<< HEAD
     uri = "url in figma"
+=======
+    uri = "uri in figma"
+>>>>>>> hannah-db-branch
     client = MongoClient(uri, server_api=ServerApi('1'))
     return client
 
@@ -45,7 +49,11 @@ def get_client_collection():
     return client_collection
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
+<<<<<<< HEAD
     ticket_collection = get_client_collection()
+=======
+    ticket_collection = get_ticket_collection()
+>>>>>>> hannah-db-branch
     '''
     Adds in a row into the ticket collection for a new ticket being input.
 
@@ -76,7 +84,8 @@ def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
         'worker' : worker,
         'device' : device,
         'client' : client,
-        'team' : team
+        'team' : team,
+        
     }
     # return the document inserted into the ticket collection
     return ticket_collection.insert_one(new_ticket)
@@ -91,8 +100,8 @@ def add_client(cli_cnt, email,phone_num, ticket_id, device_id, pref_contact):
         'client id' : client_id,
         'email' : email,
         'phone number' : phone_num,
-        'tickets' : [ticket_id],
-        'devices' : [device_id],
+        'tickets' : ticket_id,
+        'devices' : device_id,
         'contact method' : pref_contact
     }
     # return the new inserted document in the collection
@@ -108,7 +117,7 @@ def add_worker(worker_count, name, email, team, ticket):
         'name' : name,
         'email' : email,
         'team' : team,
-        'tickets' : [ticket]
+        'tickets' : ticket
     }
     # return the new worker added to the collection
     return worker_collection.insert_one(new_worker)
@@ -120,8 +129,8 @@ def add_team(team_count, worker_ids, tickets, name):
     new_team = {
         'team id' : team_id,
         'name' : name,
-        'workers' : [worker_ids],
-        'tickets': [tickets]
+        'workers' : worker_ids,
+        'tickets': tickets
     }
     # return the new team inserted into the team collection
     return team_collection.insert_one(new_team)
@@ -134,7 +143,7 @@ def add_device(dev_count, worker, dev_type, tickets, has_problems):
        'device id' : dev_id,
        'worker' : worker,
        'device type' : dev_type,
-       'tickets' : [tickets],
+       'tickets' : tickets,
        'has problems' : has_problems
     }
     return device_collection.insert_one(new_device)
