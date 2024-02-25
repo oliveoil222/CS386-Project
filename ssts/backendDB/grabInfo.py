@@ -2,7 +2,11 @@
 from bson.json_util import dumps
 import sys
 sys.path.insert(0, './')
-import addInfo as db
+import dbClasses as db
+
+
+# set up connector to database and collections
+connector = db.Connections('figma uri')
 
 # doing a dump(cursor) will return the information from the query, the first
 # element in the dictionary is just mongoDBs object id that different for
@@ -12,19 +16,29 @@ import addInfo as db
 
 # connect collections as global variables
     # connect a tickets collection
-ticket_collection = db.get_ticket_collection()
+ticket_collection = connector.ticket_collection
 
     # connect a workers collection
-worker_collection = db.get_worker_collection()
+worker_collection = connector.worker_collection
 
     # connect a teams collection
-team_collection = db.get_team_collection()
+team_collection = connector.team_collection
 
     # connect a device collection
-device_collection = db.get_device_collection()
+device_collection = connector.device_collection
 
     # connect client collection
-client_collection = db.get_client_collection()
+client_collection = connector.client_collection
+
+    # conntect id tracker collection
+id_tracker_collection = connector.id_tracker_collection
+
+# create function to get current id count of collection 
+def get_current_id(collection_name):
+    # go through id tracker collection and only get ticket id count
+    id_count = id_tracker_collection({'collection' : collection_name}, {'count' : 1})
+    # return the document's id count
+    return id_count
 
 # create function to find tickets with client email
 def client_email_find_tickets(client_email):
