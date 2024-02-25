@@ -56,6 +56,10 @@ def create_app(test_config=None):
     @app.route('/login')
     def agent_login_page(page_name="Agent Login"):
         return render_template("auth/login.html", page_name=page_name)
+    
+    @app.route('/signup')
+    def agent_signup_page(page_name="Agent Signup"):
+        return render_template("auth/signup.html", page_name=page_name)
 
     @app.route('/sp')
     def service_portal(page_name="Service Portal"):
@@ -71,7 +75,7 @@ def create_app(test_config=None):
 
         # render template will need to be changed in a later revision.
 
-        return render_template("new/ticket.html", page_name=page_name, id_number=id_number)
+        return render_template("new/ticket.html", page_name=page_name ) #, id_number=id_number)
 
     @app.route('/new/ticket', methods=['GET','POST'])
     def new_ticket(id_number=id_number, page_name="New Ticket {id_number}"):
@@ -135,5 +139,10 @@ def create_app(test_config=None):
             # work notes in reverse order timestamped (last comment first)
 
         return render_template("view/ticket/{id_number}.html", page_name=page_name)
+
+    
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('/error/404.html'), 404
 
     return app

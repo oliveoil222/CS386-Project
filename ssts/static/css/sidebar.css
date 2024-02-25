@@ -219,7 +219,9 @@
 .home-section{
   position: relative;
   background: #E4E9F7;
-  height: 100vh;
+  overflow: hidden;
+  min-height: 100vh;
+  max-height: fit-content;
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
@@ -232,6 +234,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  background: #E4E9F7;
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{

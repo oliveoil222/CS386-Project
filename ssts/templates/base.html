@@ -1,39 +1,155 @@
 <!DOCTYPE html>
-<html style="background-image: linear-gradient(#005678, #146488, #005678);">
-    <head>
-        <title>SSTS - {{page_name}}</title>
-        <style>
-          @import url("../static/styles.css");
-        </style>
-        <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
-    </head>
-    <body>
-      <div class="mainPage">
-        <header style="padding: 0.5rem;">
-          <h2><a href="/" style="text-decoration: none; color: #FFD700; padding-left: 25px">Super Simple Ticketing System "SSTS"</a></h2>
-        </header>
-        <div class="menuBar">
-          <ul>
-            <li><a href="/">Home Page</a></li>
-            <li><a href="/about">About SSTS</a></li>
-            <li><a href="/sp">Self Service Portal</a></li>
-            <li><a href="/login">Agent Login</a></li>
-            <li><a href="/">???</a></li>
-            <li><a href="/">???</a></li>
-          </ul>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href='../static/css/sidebar.css'>
+    <link rel="stylesheet" href='../static/css/home.css'>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+</html>
+
+<body>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <i class='bx bxl-ok-ru'></i>
+            <span class="logo_name">SSTS</span>
         </div>
-        <main>
-          <h3 style="padding-left: 10px;">Homepage of Super Simple Ticketing System "SSTS"</h3>
-          <p>I guess I'll see how long it can go or if there is anything really going on here. This is my version of some Lorem Ipsum Dolor type boilerplate text to see if anything happens.</p>
-        </main>
-        <div class="adBar">
-          <a href="."><img src="../static/placeholder.png" alt="Placeholder" width=250 height=300></a>
-          <br>
-          <body style="color: #FF2A6D">Third side bar, will continue to go off 80 characters here...</body>
+        <ul class="nav-links">
+
+            <li>
+                <a href="/">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Category</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/new">
+                    <i class='bx bx-edit-alt'></i>
+                    <span class="link_name">Create issue</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Create issue</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-phone'></i>
+                    <span class="link_name">Call</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Call</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-book-open'></i>
+                    <span class="link_name">Ticket</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Ticket</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-history'></i>
+                    <span class="link_name">History</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">History</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Setting</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Setting</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <!--<img src="image/profile.jpg" alt="profileImg">-->
+                    </div>
+                    <div class="name-job">
+                        <div class="profile_name">Dallon Jarman</div>
+                    </div>
+                    <a href="/logout">
+                        <i class='bx bx-log-out'></i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
         </div>
-        <footer style="color: #FFD700;">
-          Copyright Super Simple Ticketing System Team (SSTS) 2024
-        </footer>
-      </div>
-    </body>
+
+        <h1>Your Tickets at a Glance</h1>
+
+  <section class="open-tickets">
+    <h2>Current Open Tickets: <span id="open-ticket-count">{{ open_ticket_count }}</span></h2>
+    <div class="filters">
+      <label for="priority">Filter by Priority:</label>
+      <select id="priority" onchange="filterOpenTickets()">
+        <option value="all">All</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <ul class="ticket-list" id="open-tickets-list">
+      
+    </ul>
+  </section>
+
+  <section class="closed-tickets">
+    <h2>Recently Closed Tickets: <span id="closed-ticket-count">{{ closed_ticket_count }}</span></h2>
+    <div class="search-filter">
+      <input type="text" id="search-keyword" onkeyup="filterClosedTickets()">
+      <label for="date-range">Date Range:</label>
+      <select id="date-range" onchange="filterClosedTickets()">
+        <option value="all">All</option>
+        <option value="last-week">Last Week</option>
+        <option value="last-month">Last Month</option>
+        <option value="last-year">Last Year</option>
+      </select>
+    </div>
+    <ul class="ticket-list" id="closed-tickets-list">
+     
+    </ul>
+  </section>
+
+  <section class="additional-resources">
+    <h2>Additional Resources</h2>
+    <ul>
+      <li><a href="/new">Submit a New Ticket</a></li>
+      <li><a href="#">Knowledge Base</a></li>
+      <li><a href="#">Contact Support</a></li>
+    </ul>
+  </section>
+
+
+    </section>
+
+    <script src="../static/js/sidebar.js"></script>
+
+</body>
+
 </html>
