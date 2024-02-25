@@ -1,51 +1,14 @@
 # import libraries
-import pymongo
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
+import sys
+sys.path.insert(0, './')
+import dbClasses as db
 
-# Create a new client and connect to the server
-def connect_to_client():
-    uri = "url in figma"
-    client = MongoClient(uri, server_api=ServerApi('1'))
-    return client
+# set up connector to database and collections
+connector = db.Connections('mongodb+srv://root:KwCe8uzdTgNSUkPz@cluster0.zusbpwn.mongodb.net/?retryWrites=true&w=majority')
 
-def connect_to_ticket_tracker():
-    client = connect_to_client()
-    db = client['ticket_tracker']
-    return db
-# connect to help desk ticket database
-#db = client['ticket_tracker']
-# create collections
-    # create a tickets collection
-def get_ticket_collection():
-    db = connect_to_ticket_tracker()
-    ticket_collection = db['tickets']
-    # return collection
-    return ticket_collection
-    # create a workers collection
-def get_worker_collection():
-    db = connect_to_ticket_tracker()
-    worker_collection = db['workers']
-    return worker_collection
-
-    # create a teams collection
-def get_team_collection():
-    db = connect_to_ticket_tracker()
-    team_collection = db['teams']
-    return team_collection
-    # create a device collection
-def get_device_collection():
-    db = connect_to_ticket_tracker()
-    device_collection = db['devices']
-    return device_collection
-    # create client collection
-def get_client_collection():
-    db = connect_to_ticket_tracker()
-    client_collection = db['clients']
-    return client_collection
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
-    ticket_collection = get_ticket_collection()
+    ticket_collection = connector.ticket_collection
     '''
     Adds in a row into the ticket collection for a new ticket being input.
 
@@ -84,7 +47,7 @@ def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
 
 
 def add_client(cli_cnt, email,phone_num, ticket_id, device_id, pref_contact):
-    client_collection = get_client_collection()
+    client_collection = connector.client_collection
     # create client id
     client_id = 'c' + str(cli_cnt)
     # create a new document for the new client
@@ -100,7 +63,7 @@ def add_client(cli_cnt, email,phone_num, ticket_id, device_id, pref_contact):
     return client_collection.insert_one(new_client)
 
 def add_worker(worker_count, name, email, team, ticket):
-    worker_collection = get_worker_collection()
+    worker_collection = connector.worker_collection
     # create worker id
     worker_id = 'w' + str(worker_count)
     # create new document for the new worker
@@ -115,7 +78,7 @@ def add_worker(worker_count, name, email, team, ticket):
     return worker_collection.insert_one(new_worker)
 
 def add_team(team_count, worker_ids, tickets, name):
-    team_collection = get_team_collection()
+    team_collection = connector.team_collection
     team_id = 't' + str(team_count)
     # create new document for the new team
     new_team = {
@@ -128,7 +91,7 @@ def add_team(team_count, worker_ids, tickets, name):
     return team_collection.insert_one(new_team)
 
 def add_device(dev_count, worker, dev_type, tickets, has_problems):
-    device_collection = get_device_collection()
+    device_collection = connector.device_collection
     # create device count
     dev_id = 'd' + dev_count
     new_device = {
@@ -139,4 +102,26 @@ def add_device(dev_count, worker, dev_type, tickets, has_problems):
        'has problems' : has_problems
     }
     return device_collection.insert_one(new_device)
+
+
+
+def add_id_tracker(collection_name):
+    # connect to database
+    id_tracker_collection = connector.id_tracker_collection
+    # add new id tracked collection 
+    new_collection_tracker = {
+        'collection' : collection_name,
+        'count' : 1
+    }
+
+    # return the new id tracker document inserted
+    return id_tracker_collection.insert_one(new_collection_tracker)
+
+
+collections = ['tickets', 'workers', 'teams', 'devices', 'clients', 'solutions']
+
+for item in collections:
+    id_count = add_id_tracker(item)
+    print(id_count)
+
 
