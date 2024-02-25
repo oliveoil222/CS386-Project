@@ -5,11 +5,7 @@ from pymongo.server_api import ServerApi
 
 # Create a new client and connect to the server
 def connect_to_client():
-<<<<<<< HEAD
     uri = "url in figma"
-=======
-    uri = "uri in figma"
->>>>>>> hannah-db-branch
     client = MongoClient(uri, server_api=ServerApi('1'))
     return client
 
@@ -49,11 +45,7 @@ def get_client_collection():
     return client_collection
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
-<<<<<<< HEAD
-    ticket_collection = get_client_collection()
-=======
     ticket_collection = get_ticket_collection()
->>>>>>> hannah-db-branch
     '''
     Adds in a row into the ticket collection for a new ticket being input.
 

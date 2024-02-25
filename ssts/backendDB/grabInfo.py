@@ -1,13 +1,8 @@
 # import libraries
 from bson.json_util import dumps
-import pymongo
 import sys
 sys.path.insert(0, './')
 import addInfo as db
-<<<<<<< HEAD
-
-=======
->>>>>>> hannah-db-branch
 
 # doing a dump(cursor) will return the information from the query, the first
 # element in the dictionary is just mongoDBs object id that different for
@@ -42,16 +37,6 @@ def client_email_find_tickets(client_email):
 # create functiont to finf ticket with ticket id
 def ticket_id_find_ticket(ticket_id):
     # make a search on the database (query) to find the ticket from ticket id
-<<<<<<< HEAD
-    ticket = ticket_collection.find({'ticket id' : ticket_id})
-    # return the ticket object
-    return ticket
-
-# create function to find tickets with worker id
-def worker_id_find_tickets(worker_id):
-    # find the worker and only grab the tickets list
-    tickets = worker_collection.find({'worker id' : worker_id}, {'tickets' : 1})
-=======
         # functions: find_one
     ticket = ticket_collection.find_one({'ticket id' : ticket_id})
     # return the ticket object
@@ -63,53 +48,18 @@ def worker_id_find_tickets(worker_id):
     # find the worker and only grab the tickets list
         # functions: find_one
     tickets = worker_collection.find_one({'worker id' : worker_id}, {'tickets' : 1})
->>>>>>> hannah-db-branch
     # return the list of tickets assigned to the worker
     return tickets
 
 # create function to find tickets with worker email
 def worker_email_find_tickets(worker_email):
     # find the worker with email and grab the tickets list
-<<<<<<< HEAD
-    tickets = worker_collection.find({'email' : worker_email}, {'tickets' : 1})
-=======
         # functions: find_one
     tickets = worker_collection.find_one({'email' : worker_email}, {'tickets' : 1})
->>>>>>> hannah-db-branch
     # return the tickets list cursor
     return tickets
 
 # create function to find tickets with team id
-    # return ???
-<<<<<<< HEAD
-
-# create function to find a worker given id
-    # return ???
-
-# create function to find a worker given email
-    # return ???
-
-# create function to look for device given device id
-    # return ???
-
-# create function to look for device given device owner
-    # return ???
-
-# create function to look for device given devices ticket id
-    # return ???
-
-# create search function to find a client given client id
-    # retrun ???
-
-# create search function to find a client given client email
-    # return ???
-
-# create search function to find a client given client phone number
-    # return ???
-
-# create search function to find a client given client name
-    # return ???
-=======
 def find_team_tickets(team_id):
     # find the tickets the team has by grabbing the team with matchin id
         # functions: find_one
@@ -180,10 +130,6 @@ def find_client(client_id):
 
 
 
-
-
-
-
 # example of code using search functions
 # this sets ticket to be the search query cursor from mongoDB
 ticket = ticket_id_find_ticket('t1')
@@ -194,6 +140,5 @@ ticket = ticket_id_find_ticket('t1')
 ticket_description = dumps(ticket['description'])
 # this prints out what its giving, so you can visualize it
 print((ticket_description))
->>>>>>> hannah-db-branch
 
 
