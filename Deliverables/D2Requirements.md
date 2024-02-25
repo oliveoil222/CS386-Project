@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> hannah-db-branch
 #### **1. Positioning**
 
 _Problem statement_
 =======
+<<<<<<< HEAD
 >>>>>>> 92ed91c (updating branch)
+=======
+>>>>>>> hannah-db-branch
 # Requirements
 _Group 10 - "Super Simple Ticketing System"\
 Date and location: Feb 16, 2024\
@@ -15,9 +21,13 @@ Group Members: Olivia Vester, Dallon Jarman, Charles Descamps, Hannah Penado, Sa
 
 ### 1.1 Problem statement
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 
 <table>
@@ -43,6 +53,7 @@ Group Members: Olivia Vester, Dallon Jarman, Charles Descamps, Hannah Penado, Sa
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### 1.2. Product Position Statement
 =======
 <<<<<<< HEAD
@@ -51,6 +62,12 @@ _Product Position Statement_
 ### 1.2. Product Position Statement
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+_Product Position Statement_
+=======
+### 1.2. Product Position Statement
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 
 <table>
@@ -94,6 +111,7 @@ _Product Position Statement_
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### 1.3. Value proposition and customer segment
 =======
 <<<<<<< HEAD
@@ -102,6 +120,12 @@ _Value proposition and customer segment_
 ### 1.3. Value proposition and customer segment
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+_Value proposition and customer segment_
+=======
+### 1.3. Value proposition and customer segment
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 
 ```
@@ -112,6 +136,7 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## 2. Stakeholders
 =======
 <<<<<<< HEAD
@@ -120,6 +145,12 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 ## 2. Stakeholders
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+#### **2. Stakeholders**
+=======
+## 2. Stakeholders
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 
 
@@ -130,6 +161,7 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## 3. Functional requirements (features)
 =======
 <<<<<<< HEAD
@@ -138,6 +170,12 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 ## 3. Functional requirements (features)
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+#### **3. Functional requirements (features)**
+=======
+## 3. Functional requirements (features)
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 
 
@@ -151,6 +189,7 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## 4. Non-functional requirements
 =======
 <<<<<<< HEAD
@@ -159,6 +198,12 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 ## 4. Non-functional requirements
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+#### **4. Non-functional requirements**
+=======
+## 4. Non-functional requirements
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 
 
@@ -169,8 +214,11 @@ Consumer segment: IT Professionals who have to manage many issues at the same ti
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> hannah-db-branch
 #### **5. MVP**
 
 Our minimum viable product would be a ticketing system where users can add tickets, employees can respond to tickets, and employees can close tickets. These will be tested based on the ability of different user’s ability to use these features.
@@ -180,7 +228,10 @@ Our minimum viable product would be a ticketing system where users can add ticke
 
 ### **7. User stories**
 =======
+<<<<<<< HEAD
 >>>>>>> 92ed91c (updating branch)
+=======
+>>>>>>> hannah-db-branch
 ## 5. MVP
 
 Our minimum viable product would be a ticketing system where users can add tickets, employees can respond to tickets, and employees can close tickets. These will be tested based on the ability of different user’s ability to use these features.
@@ -284,9 +335,13 @@ Jared:\
 
 # 7. User stories
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
 
 **Priority Level Scale:** 0-12 (0 is highest priority, 12 is lowest)
 
@@ -295,8 +350,11 @@ Jared:\
 Olivia:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> hannah-db-branch
 
 
 1. As a user, I want to get help on my IT requests in a timely manner, so that I can get my devices functioning for my projects.
@@ -364,7 +422,10 @@ Hannah:
 
 #### **8. Issue Tracker**
 =======
+<<<<<<< HEAD
 >>>>>>> 92ed91c (updating branch)
+=======
+>>>>>>> hannah-db-branch
 1. As a user, I want to get help on my IT requests in a timely manner, so that I can get my devices functioning for my projects.
     - Priority Level: 0
     - Hours Spent Estimate: 650 hours (basically our whole app)
@@ -426,8 +487,13 @@ Hannah:
 
 #### **8. Issue Tracker**
 <<<<<<< HEAD
+<<<<<<< HEAD
 ![D2IssueTracker](/Deliverables/img/issueTrackerD2.png)
 =======
 ![D2IssueTracker](/Deliverables/img/issueTrackerD2.png)
 >>>>>>> hannah-db-branch
 >>>>>>> 92ed91c (updating branch)
+=======
+![D2IssueTracker](/Deliverables/img/issueTrackerD2.png)
+>>>>>>> hannah-db-branch
+>>>>>>> hannah-db-branch
