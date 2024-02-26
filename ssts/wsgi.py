@@ -1,4 +1,4 @@
-from ssts import app
+from ssts import __init__
 
 if __name__ == "__main__":
-    app.run()
+    __init__.run()
