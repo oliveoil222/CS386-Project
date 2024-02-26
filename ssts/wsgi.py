@@ -1,4 +1,4 @@
-from myproject import app
+from ssts import app
 
 if __name__ == "__main__":
     app.run()
