@@ -6,7 +6,7 @@ import dbClasses as db
 
 
 # set up connector to database and collections
-connector = db.Connections('figma uri')
+connector = db.Connections()
 
 # doing a dump(cursor) will return the information from the query, the first
 # element in the dictionary is just mongoDBs object id that different for
@@ -36,16 +36,24 @@ id_tracker_collection = connector.id_tracker_collection
 # create function to get current id count of collection 
 def get_current_id(collection_name):
     # go through id tracker collection and only get ticket id count
-    id_count = id_tracker_collection({'collection' : collection_name}, {'count' : 1})
-    # return the document's id count
+    id_count = id_tracker_collection.find_one({'collection' : collection_name}, {'count' : 1})
+    # get the str version of the id count
+    id_count = dumps(id_count['count'])
+    # convert the str to an int
+    id_count = int(id_count)
+    # return the id count integer value
     return id_count
 
 # create function to find tickets with client email
 def client_email_find_tickets(client_email):
     # need to go through client database first
         # functions: find_one
-    tickets = client_collection.find_one({'email' : client_email}, {'tickets' : 1})
-    # return the list of ticket ids
+    tickets = client_collection.find_one({'email' : client_email})
+    # get the str version of the tickets 
+        # functions: dumps)
+    tickets = dumps(tickets['tickets'])
+    print(tickets)
+    # return the list of tickets
     return tickets
 
 # create functiont to finf ticket with ticket id
@@ -53,6 +61,7 @@ def ticket_id_find_ticket(ticket_id):
     # make a search on the database (query) to find the ticket from ticket id
         # functions: find_one
     ticket = ticket_collection.find_one({'ticket id' : ticket_id})
+
     # return the ticket object
     return ticket
 
@@ -61,7 +70,10 @@ def ticket_id_find_ticket(ticket_id):
 def worker_id_find_tickets(worker_id):
     # find the worker and only grab the tickets list
         # functions: find_one
-    tickets = worker_collection.find_one({'worker id' : worker_id}, {'tickets' : 1})
+    tickets = worker_collection.find_one({'worker id' : worker_id})
+    # get the str version of the tickets 
+        # functions: dumps
+    tickets = dumps(tickets['tickets'])
     # return the list of tickets assigned to the worker
     return tickets
 
@@ -69,7 +81,10 @@ def worker_id_find_tickets(worker_id):
 def worker_email_find_tickets(worker_email):
     # find the worker with email and grab the tickets list
         # functions: find_one
-    tickets = worker_collection.find_one({'email' : worker_email}, {'tickets' : 1})
+    tickets = worker_collection.find_one({'email' : worker_email})
+    # get the str version of the tickets 
+        # functions: dumps
+    tickets = dumps(tickets['tickets'])
     # return the tickets list cursor
     return tickets
 
@@ -77,7 +92,10 @@ def worker_email_find_tickets(worker_email):
 def find_team_tickets(team_id):
     # find the tickets the team has by grabbing the team with matchin id
         # functions: find_one
-    tickets = team_collection.find_one({'team id' : team_id}, {'tickets' : 1})
+    tickets = team_collection.find_one({'team id' : team_id})
+    # get the str version of the tickets 
+        # functions: dumps
+    tickets = dumps(tickets['tickets'])
     # return the list of tickets to the user
     return tickets
 
@@ -153,6 +171,6 @@ ticket = ticket_id_find_ticket('t1')
 # attribute attatched
 ticket_description = dumps(ticket['description'])
 # this prints out what its giving, so you can visualize it
-print((ticket_description))
+#print((ticket_description))
 
 

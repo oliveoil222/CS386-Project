@@ -4,8 +4,7 @@ sys.path.insert(0, './')
 import dbClasses as db
 
 # set up connector to database and collections
-connector = db.Connections('mongodb+srv://root:KwCe8uzdTgNSUkPz@cluster0.zusbpwn.mongodb.net/?retryWrites=true&w=majority')
-
+connector = db.Connections()
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
     ticket_collection = connector.ticket_collection
@@ -117,11 +116,6 @@ def add_id_tracker(collection_name):
     # return the new id tracker document inserted
     return id_tracker_collection.insert_one(new_collection_tracker)
 
-
-collections = ['tickets', 'workers', 'teams', 'devices', 'clients', 'solutions']
-
-for item in collections:
-    id_count = add_id_tracker(item)
-    print(id_count)
+print(add_client(1, 'test@email.com', '9285550000', 't-000', 'd-000', 'text'))
 
 

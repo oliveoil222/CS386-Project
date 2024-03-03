@@ -3,10 +3,10 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson.json_util import dumps
 
-
+uri = input('mongoDB database connection uri: ')
 # class to initialize connections to mongoDB
 class Connections:
-    def __init__(self, uri):
+    def __init__(self):
         # client
         self.client = MongoClient(uri, server_api=ServerApi('1'))
         # ssts database
