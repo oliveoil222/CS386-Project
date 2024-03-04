@@ -26,7 +26,6 @@ Note: Debug mode will reload on py file changes, great for developing in real ti
 - [Jinja Templating](https://jinja.palletsprojects.com/en/3.1.x/templates/)
 - [Click Documentation](https://click.palletsprojects.com/en/8.1.x/)
 - [Pandas Documentation](https://pandas.pydata.org/docs/)
-- [Werkzeug Documentation](https://werkzeug.palletsprojects.com/en/3.0.x/)
 ---
 ## Contributors
 - Olivia V. [oliveoil222](https://github.com/oliveoil222)
