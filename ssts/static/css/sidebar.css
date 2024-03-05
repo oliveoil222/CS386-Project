@@ -242,7 +242,7 @@
   font-size: 35px;
 }
 .home-section .home-content .bx-menu{
-  margin: 0 15px;
+  margin: 0 15px!important;
   cursor: pointer;
 }
 .home-section .home-content .text{
