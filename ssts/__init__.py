@@ -106,7 +106,7 @@ def create_app(test_config=None):
     @app.route('/new/ticket', methods=['GET','POST'])
 
     def new_ticket(id_number=id_number, page_name="New Ticket {id_number}"):
-        global id_number
+
         # will need to save the DB information from the webpage
         # probably using an API request template once the submit button was hit.
         # will need to get the information from front-end about what information
