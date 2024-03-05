@@ -3,8 +3,8 @@
 
 <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" href='../static/css/sidebar.css'>
-    <link rel="stylesheet" href='../static/css/home.css'>
+    <link rel="stylesheet" type="text/css" href="../static/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/form.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -20,7 +20,7 @@
         <ul class="nav-links">
 
             <li>
-                <a href="/">
+                <a href="./base.html">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
@@ -30,7 +30,7 @@
             </li>
 
             <li>
-                <a href="/new">
+                <a href="#">
                     <i class='bx bx-edit-alt'></i>
                     <span class="link_name">Create issue</span>
                 </a>
@@ -88,9 +88,7 @@
                     <div class="name-job">
                         <div class="profile_name">Dallon Jarman</div>
                     </div>
-                    <a href="/logout">
-                        <i class='bx bx-log-out'></i>
-                    </a>
+                    <i class='bx bx-log-out'></i>
                 </div>
             </li>
         </ul>
@@ -101,49 +99,41 @@
             <i class='bx bx-menu'></i>
         </div>
 
-        <h1>Your Tickets at a Glance</h1>
-
-  <section class="open-tickets">
-    <h2>Current Open Tickets: <span id="open-ticket-count">{{ open_ticket_count }}</span></h2>
-    <div class="filters">
-      <label for="priority">Filter by Priority:</label>
-      <select id="priority" onchange="filterOpenTickets()">
-        <option value="all">All</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-    </div>
-    <ul class="ticket-list" id="open-tickets-list">
-      
-    </ul>
-  </section>
-
-  <section class="closed-tickets">
-    <h2>Recently Closed Tickets: <span id="closed-ticket-count">{{ closed_ticket_count }}</span></h2>
-    <div class="search-filter">
-      <input type="text" id="search-keyword" onkeyup="filterClosedTickets()">
-      <label for="date-range">Date Range:</label>
-      <select id="date-range" onchange="filterClosedTickets()">
-        <option value="all">All</option>
-        <option value="last-week">Last Week</option>
-        <option value="last-month">Last Month</option>
-        <option value="last-year">Last Year</option>
-      </select>
-    </div>
-    <ul class="ticket-list" id="closed-tickets-list">
-     
-    </ul>
-  </section>
-
-  <section class="additional-resources">
-    <h2>Additional Resources</h2>
-    <ul>
-      <li><a href="/new">Submit a New Ticket</a></li>
-      <li><a href="#">Knowledge Base</a></li>
-      <li><a href="#">Contact Support</a></li>
-    </ul>
-  </section>
+        <div class="container">
+            <h1>Create a new Issue</h1>
+            <form action="">
+                <div class="form-group">
+                    <label for="issueType">Issue Type</label>
+                    <select name="issueType" id="issueType">
+                        <option value="ticket">Ticket</option>
+                        <option value="Call">Call</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" placeholder="Enter a title for the issue">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10"
+                        placeholder="Describe issue in detail"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" name="phoneNumber" id="phoneNumber"
+                        placeholder="Enter customer's phone number">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Enter customers email address">
+                </div>
+                <button type="submit">Create</button>
+            </form>
+        </div>
 
 
     </section>
