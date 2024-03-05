@@ -72,9 +72,6 @@ def create_app(test_config=None):
     
     @app.route('/signup', methods=['GET','POST'])
     def agent_signup_page(page_name="Agent Signup"):
-        message = ""
-        if "email" in session:
-            return redirect(url_for("/"))
 
         if request.method == 'POST':
             username = str( request.form.get('username') )
