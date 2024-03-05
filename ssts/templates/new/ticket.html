@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Create Incident</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href='../static/css/sidebar.css'>
     <link rel="stylesheet" href='../static/css/form.css'>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -14,23 +14,23 @@
 <body>
     <div class="sidebar close">
         <div class="logo-details">
-            <i class='bx bxl-ok-ru'></i>
-            <span class="logo_name">SSTS</span>
+            <a href="/" style="text-decoration:none"><i class='bx bxl-ok-ru'></i></a>
+            <a href="/" style="text-decoration:none"><span class="logo_name">SSTS</span></a>
         </div>
         <ul class="nav-links">
 
             <li>
-                <a href="/">
+                <a href=" {{ url_for('homepage') }} ">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Category</a></li>
+                    <li><a class="link_name" href="#">Dashboard</a></li>
                 </ul>
             </li>
 
             <li>
-                <a href="/new">
+                <a href=" {{ url_for('new_ticket') }} ">
                     <i class='bx bx-edit-alt'></i>
                     <span class="link_name">Create issue</span>
                 </a>
@@ -40,7 +40,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href=" {{ url_for('view_call') }} ">
                     <i class='bx bx-phone'></i>
                     <span class="link_name">Call</span>
                 </a>
@@ -50,7 +50,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href=" {{ url_for('view_ticket_list') }} ">
                     <i class='bx bx-book-open'></i>
                     <span class="link_name">Ticket</span>
                 </a>
@@ -61,17 +61,17 @@
 
 
             <li>
-                <a href="#">
-                    <i class='bx bx-history'></i>
-                    <span class="link_name">History</span>
+                <a href=" {{ url_for('knowledgebase')}} ">
+                    <i class='bx bx-brain'></i>
+                    <span class="link_name">Knowledge Base</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">History</a></li>
+                    <li><a class="link_name" href="#">Knowledge Base</a></li>
                 </ul>
             </li>
 
             <li>
-                <a href="#">
+                <a href=" {{ url_for('setting') }} ">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
                 </a>
@@ -88,14 +88,14 @@
                     <div class="name-job">
                         <div class="profile_name">Dallon Jarman</div>
                     </div>
-                    <a href="/login">
+                    <a href=" {{ url_for('agent_login_page') }} ">
                         <i class='bx bx-log-out'></i>
                     </a>
                 </div>
             </li>
         </ul>
     </div>
-    
+
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu'></i>
@@ -103,16 +103,13 @@
 
         <div class="container">
             <h1>Create a new Issue</h1>
-
             <form method="POST">
-
                 <div class="form-group">
                     <label for="ticketID">Ticket ID</label>
-                    <input type="text" name="ticketID" required id="ticketID" value="{{ticketID}}" readonly>
+                    <input type="text" name="ticketID" required id="ticketID" value="{{id_number}}" readonly>
                 </div>
 
-                <div class="form-group">
-                    <label for="issueType">Issue Type</label>
+                <div class="form-group"> <label for="type">Issue Type</label>
                     <select name="issueType" id="issueType">
                         <option value="ticket">Ticket</option>
                         <option value="Call">Call</option>
@@ -127,27 +124,10 @@
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea name="description" required id="description" cols="30" rows="10"
-                        placeholder="Describe issue in detail"></textarea>
+                        placeholder="Describe issue in detail"> </textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" required id="name" placeholder="Enter customer's name">
-                </div>
-
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" name="phoneNumber" required id="phoneNumber"
-                        placeholder="Enter customer's phone number" autocorrect enterkeyhint>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" required id="email" placeholder="Enter customer's email address">
-                </div>
-
-                <div class="form-group">
-                    <label for="worker">Ticket Worker</label>
+                <div class="form-group"> <label for="worker">Ticket Worker</label>
                     <input type="text" name="worker" required id="worker" placeholder="Enter the worker's name">
                 </div>
 
@@ -156,12 +136,16 @@
                     <input type="text" name="device" required id="device" placeholder="Enter the device name">
                 </div>
 
+                <div class="form-group"> <label for="device">Client</label>
+                    <input type="text" name="client" required id="device" placeholder="Enter the device name">
+                </div>
+
                 <div class="form-group">
-                    <label for="team">Ticket Team</label>
+                    <label for="client">Ticket Team</label>
                     <input type="text" name="team" required id="team" placeholder="Enter the team name">
                 </div>
 
-                <button type="submit">Create</button>
+                <button type="submit" class="btn">Submit</button>
             </form>
         </div>
 

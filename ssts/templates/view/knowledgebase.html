@@ -4,7 +4,7 @@
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" href='../static/css/sidebar.css'>
-    <link rel="stylesheet" href='../static/css/home.css'>
+    <link rel="stylesheet" href='../static/css/form.css'>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -95,61 +95,19 @@
             </li>
         </ul>
     </div>
-    
+
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu'></i>
         </div>
 
-        <h1>Your Tickets at a Glance</h1>
+    <div class="call-list">
+       <h1>Knowledge Base</h1>
+       <p>Work in progress</p>
+    </div>
 
-        <section class="open-tickets">
-            <h2>Current Open Tickets: <span id="open-ticket-count">{{ open_ticket_count }}</span></h2>
-            <div class="filters">
-            <label for="priority">Filter by Priority:</label>
-            <select id="priority" onchange="filterOpenTickets()">
-                <option value="all">All</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-            </select>
-            </div>
-            <ul class="ticket-list" id="open-tickets-list">
-            
-            </ul>
-        </section>
+</section>
 
-        <section class="closed-tickets">
-            <h2>Recently Closed Tickets: <span id="closed-ticket-count">{{ closed_ticket_count }}</span></h2>
-            <div class="search-filter">
-            <input type="text" id="search-keyword" onkeyup="filterClosedTickets()">
-            <label for="date-range">Date Range:</label>
-            <select id="date-range" onchange="filterClosedTickets()">
-                <option value="all">All</option>
-                <option value="last-week">Last Week</option>
-                <option value="last-month">Last Month</option>
-                <option value="last-year">Last Year</option>
-            </select>
-            </div>
-            <ul class="ticket-list" id="closed-tickets-list">
-            
-            </ul>
-        </section>
-
-        <section class="additional-resources">
-            <h2>Additional Resources</h2>
-            <ul>
-            <li><a href="{{ url_for('new_ticket')}}">Submit a New Ticket</a></li>
-            <li><a href="{{ url_for('knowledgebase')}}">Knowledge Base</a></li>
-            <li><a href="#">Contact Support</a></li>
-            </ul>
-        </section>
-
-
-    </section>
-
-    <script src="../static/js/sidebar.js"></script>
-
-</body>
+<script src="../static/js/sidebar.js"></script>
 
 </html>
