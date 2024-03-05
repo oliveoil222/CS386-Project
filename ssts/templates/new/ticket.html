@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+<body>
+    <h1>New Ticket</h1>
+    <p>Page Number: <span id="page_number">{{ id_number }}</span></p>
+    <button id="increment_button" onclick="incrementPageNumber()">Increment Page Number</button>
 
+</body>
 <head>
-    <title>Create Ticket</title>
+    <title>Create Incident</title>
     <link rel="stylesheet" href='../static/css/sidebar.css'>
     <link rel="stylesheet" href='../static/css/form.css'>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-</html>
-
 <body>
+    <script>
+        // Function to increment the page number and redirect to the new page
+        function incrementPageNumber() {
+            var pageNumber = parseInt(document.getElementById("page_number").innerText);
+            pageNumber++;
+            document.getElementById("page_number").innerText = pageNumber;
+            // Redirect to the new page
+            window.location.href = "/new/ticket" + pageNumber.toString().padStart(3, '0');
+        }
+    </script>
     <div class="sidebar close">
         <div class="logo-details">
             <a href="/" style="text-decoration:none"><i class='bx bxl-ok-ru'></i></a>
