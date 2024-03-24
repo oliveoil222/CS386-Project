@@ -123,11 +123,12 @@ Our minimum viable product would be a ticketing system where users can add ticke
 ## 6. Use cases
 
 ### 6.1. Use case diagram
-**![Use case diagram](/Deliverables/img/Use%20Case%20Diagram.png)
+![Use case diagram](/Deliverables/img/D2/Use%20Case%20Diagram.png)
 
 ### 6.2. Use case description
+---
+### Olivia:
 
-Olivia:\
 **Use case**: User submits a ticket\
 **Actor**: User\
 **Trigger**: The user hits the submit button for their ticket submission\
@@ -135,38 +136,45 @@ Olivia:\
 **Post-Condition**: The ticket enters the request pool\
 **Success scenario**:
 1. An employee is assigned the ticket and able to do what is requested
-2. An employee completes the ticket
+2. An employee completes the ticket 
+
 **Alternative Flows**:
 1. The ticket request is too broad to be filled
-2. The user must resubmit their request
-![Olivia's Diagram](/Deliverables/img/OliviaDiagram.png)
+2. The user must resubmit their request 
 
+![Olivia's Diagram](/Deliverables/img/D2/OliviaDiagram.png)
 
-Charles:\
+---
+### Charles:
+
 **Use Case**: Support Agent closes a ticket\
 **Actor**: IT Employee\
 **Trigger**: Employee switches the status of the ticket to closed\
 **Pre-Condition**: Employee is logged into the system\
 **Success Scenario**:
 1. Ticket is completed, employee can close the ticket
-2. Employee switches the status of the ticket from open to closed
+2. Employee switches the status of the ticket from open to closed 
+
 **Alternative Flows**:
 1. Ticket is a duplicate of another ticket, mark as closed
-2. Ticket is out of scope for the department, mark as closed
+2. Ticket is out of scope for the department, mark as closed 
+---
+### Sam:
 
-Sam:\
 **Use Case**: The administrator assigns tickets\
 **Actor**: Administrator\
 **Trigger**: Administrator assigns tickets to employees \
 **Pre-Condition**: Administrator logged in\
 **Success Scenario**:
 1. Ticket is assigned to a designated employee
-2. The employee is able to see the tickets assigned to them
-**Alternative Flows**:
-1. Employee has too many tickets sent to them, can't assign
-2. Employee does not exist, can't assign
+2. The employee is able to see the tickets assigned to them 
 
-Dallon:\
+**Alternative Flows**:
+1. Employee has too many tickets sent to them, can't assign 
+2. Employee does not exist, can't assign 
+---
+### Dallon:
+
 **Use case**: IT employee signs into the web application\
 **Actor**: IT employee\
 **Trigger**: The IT employee wants to sign into their account to access their tickets\
@@ -175,12 +183,14 @@ Dallon:\
 **Success scenario**:
 1. The IT employee successfully signs in
 2. The IT employee is able to see all their open and closed tickets. 
+
 **Alternative Flows**:
 1. The app rejects the user sign in
-2. The app prompts the user to enter the correct password.
+2. The app prompts the user to enter the correct password. 
 
+---
+### Hannah:
 
-Hannah:\
 **Use case**: Update ticket progress\
 **Actor**: IT employee\
 **Trigger**: The IT employee updates the progress on a ticket.\
@@ -191,13 +201,17 @@ Hannah:\
 2. The IT employee selects to update the ticket progress
 3. The ticket progression shows what has been done to fix the ticket’s problem for future reference 
 4. The ticket progression can be viewed by the client, manager, or other employees
+
 **Alternative Flows**:
 1. The application rejects the update request for incomplete information
 2. The application informs the user of the incomplete info error
 3. The application asks the user to input additional information. 
-![Hannah's Diagram](/Deliverables/img/Hannah%20Diagram.png)
 
-Jared:\
+![Hannah's Diagram](/Deliverables/img/D2/Hannah%20Diagram.png)
+
+---
+### Jared:
+
 **Use Case**: User searches for specific ticket\
 **Actor**: Client/IT Employee\
 **Trigger**: User wishes to see the details of a specific ticket\
@@ -207,12 +221,14 @@ Jared:\
 1. User signs into their account
 2. User searches for a specific ticket
 3. System verifies user has access to the ticket
-4. System returns the ticket to the user
+4. System returns the ticket to the user 
+
 **Alternative Scenario: 
 1. System finds that user does not have access to the ticket
 2. System informs the user of an error
-3. System prompts the user to try again
-![Jared's Diagram](/Deliverables/img/JaredDiagram.png)
+3. System prompts the user to try again 
+
+![Jared's Diagram](/Deliverables/img/D2/JaredDiagram.png)
 
 
 
@@ -285,4 +301,4 @@ Hannah:
 
 
 #### **8. Issue Tracker**
-![D2IssueTracker](/Deliverables/img/issueTrackerD2.png)
+![D2IssueTracker](/Deliverables/img/D2/issueTrackerD2.png)
