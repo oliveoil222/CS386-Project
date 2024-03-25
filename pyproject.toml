@@ -6,12 +6,12 @@ build-backend = "hatchling.build"
 name = "super_simple_ticketing_system_oliveoil222"
 version = "1.0.0"
 authors = [
-  { name="Olivia Vester", email="github/oliveoil222" },
-  { name="Hannah Penado", email="github/hannahpenado" },
-  { name="Charles Descamps", email="github/cmd644" },
-  { name="Dallon Jarman", email="github/dallonjarman" },
-  { name="Sam Cain", email="github/SamCain04" },
-  { name="Jared Kagie", email="github/jjkagie" }
+  { name="Olivia Vester", email="128737897+oliveoil222@users.noreply.github.com" },
+  { name="Hannah Penado", email="hannahpenado@gmail.com" },
+  { name="Charles Descamps", email="128670210+cmd644@users.noreply.github.com" },
+  { name="Dallon Jarman", email="116462823+dallonjarman@users.noreply.github.com" },
+  { name="Sam Cain", email="src556@nau.edu" },
+  { name="Jared Kagie", email="jjkagie@users.noreply.github.com" }
 ]
 description = "Super Simple Ticketing System[SSTS]"
 readme = "README.md"
