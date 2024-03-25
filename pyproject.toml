@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "super_simple_ticketing_system_oliveoil222"
+version = "1.0.0"
+authors = [
+  { name="Olivia Vester", email="github/oliveoil222" },
+  { name="Hannah Penado", email="github/hannahpenado" },
+  { name="Charles Descamps", email="github/cmd644" },
+  { name="Dallon Jarman", email="github/dallonjarman" },
+  { name="Sam Cain", email="github/SamCain04" },
+  { name="Jared Kagie", email="github/jjkagie" }
+]
+description = "Super Simple Ticketing System[SSTS]"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: The Unlicense (Unlicense)",
+    "Operating System :: POSIX :: Linux",
+    "Development Status :: 2 - Pre-Alpha",
+    "Framework :: Flask",
+    "Topic :: Internet :: WWW/HTTP :: WSGI",
+    "Topic :: Office/Business",
+    "Private :: Do Not Upload"
+]
+
+[project.urls]
+Homepage = "https://github.com/oliveoil222/CS386-Project"
+Issues = "https://github.com/oliveoil222/CS386-Project/issues"
