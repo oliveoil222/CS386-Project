@@ -7,7 +7,7 @@ packages = ["CS386-Project"]
 
 [project]
 name = "super_simple_ticketing_system_oliveoil222"
-version = "1.0.0"
+version = "v1.0.0"
 authors = [
   { name="Olivia Vester", email="128737897+oliveoil222@users.noreply.github.com" },
   { name="Hannah Penado", email="hannahpenado@gmail.com" },
