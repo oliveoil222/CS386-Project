@@ -2,6 +2,7 @@
 import sys
 sys.path.insert(0, './')
 import dbClasses as db
+import updateInfo as update
 
 # set up connector to database and collections
 connector = db.Connections()
