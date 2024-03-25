@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Sign up</h1>
         
-        <form action="#">
+        <form action="#" method="POST">
             <label for="username">Username</label>
             <input type="username" id="username" name="username" placeholder="Enter your username">
 
@@ -30,15 +30,13 @@
             <input type="password" id="pass" name="password" placeholder="Enter your password">
 
             <label for="password">Confirm Password</label>
-            <input type="password" id="confirm_pass" name="password" placeholder="Repeat your password" onkeyup="validate_password()">
-
-            <span id="wrong_pass_alert"></span>
+            <input type="password" id="confirm_pass" name="password1" placeholder="Repeat your password">
 
             <button type="submit" id="create"  value="Sign Up">Create account</button>
             <p>Have an account? <a href="/login">Login</a></p>
             
         </form>
     </div>
-    <script src="../../static/js/signup.js"></script>
+
 </body>
 </html>
