@@ -79,7 +79,7 @@ def add_worker(worker_count, name, email, team, ticket):
 
 def add_team(team_count, worker_ids, tickets, name):
     team_collection = connector.team_collection
-    team_id = 't' + str(team_count)
+    team_id = 'g' + str(team_count)
     # create new document for the new team
     new_team = {
         'team id' : team_id,
@@ -93,7 +93,7 @@ def add_team(team_count, worker_ids, tickets, name):
 def add_device(dev_count, worker, dev_type, tickets, has_problems):
     device_collection = connector.device_collection
     # create device count
-    dev_id = 'd' + dev_count
+    dev_id = 'd' + str(dev_count)
     new_device = {
        'device id' : dev_id,
        'worker' : worker,
@@ -116,7 +116,3 @@ def add_id_tracker(collection_name):
 
     # return the new id tracker document inserted
     return id_tracker_collection.insert_one(new_collection_tracker)
-
-print(add_client(1, 'test@email.com', '9285550000', 't-000', 'd-000', 'text'))
-
-
