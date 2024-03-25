@@ -5,11 +5,11 @@ name: Python package main
 
 on:
   push:
-    branches: [ "main" ]
+    #branches: [ "main" ]
     tags:
       - 'v*' # Trigger on version tags, e.g., v1.0.0
-  pull_request:
-    branches: [ "main" ]
+  #pull_request:
+    #branches: [ "main" ]
 
 jobs:
   build:
