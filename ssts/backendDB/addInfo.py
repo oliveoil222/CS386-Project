@@ -9,24 +9,6 @@ connector = db.Connections()
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
     ticket_collection = connector.ticket_collection
-    '''
-    Adds in a row into the ticket collection for a new ticket being input.
-
-    PARAMETERS:
-    > tick_cnt (required) int: the current total of ticket rows that will
-            be input after this ticket
-    > desc (required) string: a string of the description of the ticket
-            issue.
-    > title (required) string: a title for the ticket
-    > type (required) int: the enumerated value of the type the ticket's
-            category falls under
-    > worker (required) string: the worker email who is assigned the ticket
-    > device (required) int: enumerated value of the device's type
-    > client (required) string: the email of the client who submitted the 
-            ticket.
-    > team (required) int: the enumerated value for the team assigned the
-            ticket
-    '''
     # create ticket id
     ticket_id = 't' + str(tick_cnt)
     # create document dictionary to add to the collection
