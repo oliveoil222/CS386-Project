@@ -35,22 +35,33 @@ class User:
 # create a class for tickets
 class Ticket:
     # create init function 
-    def __init__(self, desc, title,  worker, device,  progress_level, work_progress):
+    def __init__(self):
         # connection to ticket collection
         database = Database()
         self.collection = database.db['tickets']
-        self.description = desc
-        self.title = title
-        self.worker = worker
-        self.device = device
-        self.progress_level = progress_level
-        self.work_progress = work_progress
     # method to add ticket to database collection
     # method to update worker
     # method to update progress level
     # method to update work progress
-    def add_document(self):
-        return None
+    def add_ticket(self, tick_cnt, desc, title, type,  worker, device, client, team):
+        ticket_collection = self.collection
+        # create ticket id
+        ticket_id = 't' + str(tick_cnt)
+        # create document dictionary to add to the collection
+            # the id is made by pymongo so we dont have to do that
+        new_ticket = {
+            'ticket id' : ticket_id,
+            'description': desc,
+            'title' : title,
+            'type' : type,
+            'worker' : worker,
+            'device' : device,
+            'client' : client,
+            'team' : team,
+            
+        }
+        # return the document inserted into the ticket collection
+        return ticket_collection.insert_one(new_ticket)
 
 # create subclass of tickets for solutions
 class Solution:
@@ -62,27 +73,52 @@ class Solution:
         # create id attribute
         id_collection = ID()
         self.id_count = id_collection.grab_info('solutions')
-        self.team = team
-        self.work_progress = work_progress
-        self.keywords = keywords
-        self.device_os = device_os
         # solution info
         # method to add solution
+    def add_solution(self, team, work_progress, keywords, device_os):
+        # set up connection to solution collection
+        solutions = self.collection
+        # create solution id
+        solution_count = self.id_count
+        soulution_id = 's' + str(solution_count)
+        # add solution to collection of solutions
+        new_solution = {
+            'team' : team,
+            'work progress' : work_progress,
+            'keywords' : keywords,
+            'operating system': device_os
+        }
+        # return document pymongo id of new solution
+        return solutions.insert_one(new_solution)
+            # add team, work progress, keywords, device operating system
+        
     
 # create subclass of users for clients
 class Client:
     # create init function 
-    def __init__(self, email, name, phone_num, contact_method):
+    def __init__(self):
         database = Database()
         self.collection = database.db['client']
-        self.email = email
-        self.name = name
-        self.phone_number = phone_num
-        self.contact_method = contact_method
-        # method to get tickets
-        # method to get devices
-        # connection to client collection
-        # client 
+        # create id attribute
+        id_collection = ID()
+        self.id_count = id_collection.grab_info('clients')
+    # add client method
+    def add_client(self, email, name, phone_num, contact_method):
+        # set up client collection connection
+        clients = self.collection
+        # create client id
+        id_num = self.id_count
+        client_id = 'c' + str(id_num)
+        # create a new document for the new client
+        new_client = {
+            'client id' : client_id,
+            'email' : email,
+            'name': name,
+            'phone number' : phone_num,
+            'contact method' : contact_method
+        }
+        # return the new added client pymongo id
+        return clients.insert_one(new_client)
         
         
 # create subclass of users for workers
@@ -91,34 +127,70 @@ class Worker:
     # collection connection
         database = Database()
         self.collection = database.db['workers']
-        self.name = name 
-        self.email = email
-        self.team = team
-    # create init function 
-        # connection to worker collection
-        
+        # create id attribute
+        id_collection = ID()
+        self.id_count = id_collection.grab_info('workers')
+    # add worker to collection
+    def add_worker(self, name, email, team):
+        worker_collection = self.collection
+        # create worker id
+        worker_id = 'w' + str(self.id_count)
+        # create new document for the new worker
+        new_worker = {
+            'worker id' : worker_id,
+            'name' : name,
+            'email' : email,
+            'team' : team
+        }
+        # return the new worker added to the collection
+        return worker_collection.insert_one(new_worker)
+            
 # create class for teams
 class Team:
-    def __init__(self, name, workers):
+    def __init__(self):
         # collection connection
         database = Database()
         self.collection = database.db['teams']
-        self.name = name
-        self.workers = workers
+        # create id attribute
+        id_collection = ID()
+        self.id_count = id_collection.grab_info('teams')
     # create init function 
+    def add_team(self, name, workers):
         # connection to team collection
+        team_collection = self.collection
+        # create id for team
+        team_id = 'g' + str(self.id_count)
+        # create new document for the new team
+        new_team = {
+            'team id' : team_id,
+            'name' : name,
+            'workers' : workers
+        }
+        # return the new team inserted into the team collection
+        return team_collection.insert_one(new_team)
 
         
 # create class for devices
 class Device:
-    def __init__(self, worker, os_type, problems):
+    def __init__(self):
         database = Database()
         self.collection = database.db['devices']
-        self.worker = worker
-        self.os = os_type
-        self.problems = problems
-    # create init function 
-        # connection to device collection
+        # create id attribute
+        id_collection = ID()
+        self.id_count = id_collection.grab_info('teams')
+    # method to add device to collection
+    def add_device(self, worker, os_type, problems):
+        device_collection = self.collection
+        # create device count
+        dev_id = 'd' + str(self.id_count)
+        new_device = {
+            'device id' : dev_id,
+            'worker' : worker,
+            'device type' : os_type,
+            'problems' : problems
+        }
+        # return pymongo id of new document in collection
+        return device_collection.insert_one(new_device)
 
         
 # add class for id trackers
@@ -150,6 +222,7 @@ class ID:
         
     # create init function 
         # connection to id collection
+
 
 
 
