@@ -1,155 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "sidebar.html" %}
 
-<head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href='../static/css/sidebar.css'>
-    <link rel="stylesheet" href='../static/css/home.css'>
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{% block content %}
+    <h1>Your Tickets at a Glance</h1>
 
-</html>
-
-<body>
-    <div class="sidebar close">
-        <div class="logo-details">
-            <a href="/" style="text-decoration:none"><i class='bx bxl-ok-ru'></i></a>
-            <a href="/" style="text-decoration:none"><span class="logo_name">SSTS</span></a>
+    <section class="open-tickets">
+        <h2>Current Open Tickets: <span id="open-ticket-count">{{ open_ticket_count }}</span></h2>
+        <div class="filters">
+        <label for="priority">Filter by Priority:</label>
+        <select id="priority" onchange="filterOpenTickets()">
+            <option value="all">All</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
         </div>
-        <ul class="nav-links">
-
-            <li>
-                <a href=" {{ url_for('homepage') }} ">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Dashboard</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('new_ticket') }} ">
-                    <i class='bx bx-edit-alt'></i>
-                    <span class="link_name">Create issue</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Create issue</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('view_call') }} ">
-                    <i class='bx bx-phone'></i>
-                    <span class="link_name">Call</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Call</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('view_ticket_list') }} ">
-                    <i class='bx bx-book-open'></i>
-                    <span class="link_name">Ticket</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Ticket</a></li>
-                </ul>
-            </li>
-
-
-            <li>
-                <a href=" {{ url_for('knowledgebase')}} ">
-                    <i class='bx bx-brain'></i>
-                    <span class="link_name">Knowledge Base</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Knowledge Base</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('setting') }} ">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <!--<img src="image/profile.jpg" alt="profileImg">-->
-                    </div>
-                    <div class="name-job">
-                        <div class="profile_name">Dallon Jarman</div>
-                    </div>
-                    <a href=" {{ url_for('agent_login_page') }} ">
-                        <i class='bx bx-log-out'></i>
-                    </a>
-                </div>
-            </li>
+        <ul class="ticket-list" id="open-tickets-list">
+        
         </ul>
-    </div>
-    
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu'></i>
-        </div>
-
-        <h1>Your Tickets at a Glance</h1>
-
-        <section class="open-tickets">
-            <h2>Current Open Tickets: <span id="open-ticket-count">{{ open_ticket_count }}</span></h2>
-            <div class="filters">
-            <label for="priority">Filter by Priority:</label>
-            <select id="priority" onchange="filterOpenTickets()">
-                <option value="all">All</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-            </select>
-            </div>
-            <ul class="ticket-list" id="open-tickets-list">
-            
-            </ul>
-        </section>
-
-        <section class="closed-tickets">
-            <h2>Recently Closed Tickets: <span id="closed-ticket-count">{{ closed_ticket_count }}</span></h2>
-            <div class="search-filter">
-            <input type="text" id="search-keyword" onkeyup="filterClosedTickets()">
-            <label for="date-range">Date Range:</label>
-            <select id="date-range" onchange="filterClosedTickets()">
-                <option value="all">All</option>
-                <option value="last-week">Last Week</option>
-                <option value="last-month">Last Month</option>
-                <option value="last-year">Last Year</option>
-            </select>
-            </div>
-            <ul class="ticket-list" id="closed-tickets-list">
-            
-            </ul>
-        </section>
-
-        <section class="additional-resources">
-            <h2>Additional Resources</h2>
-            <ul>
-            <li><a href="{{ url_for('new_ticket')}}">Submit a New Ticket</a></li>
-            <li><a href="{{ url_for('knowledgebase')}}">Knowledge Base</a></li>
-            <li><a href="#">Contact Support</a></li>
-            </ul>
-        </section>
-
-
     </section>
 
-    <script src="../static/js/sidebar.js"></script>
+    <section class="closed-tickets">
+        <h2>Recently Closed Tickets: <span id="closed-ticket-count">{{ closed_ticket_count }}</span></h2>
+        <div class="search-filter">
+        <input type="text" id="search-keyword" onkeyup="filterClosedTickets()">
+        <label for="date-range">Date Range:</label>
+        <select id="date-range" onchange="filterClosedTickets()">
+            <option value="all">All</option>
+            <option value="last-week">Last Week</option>
+            <option value="last-month">Last Month</option>
+            <option value="last-year">Last Year</option>
+        </select>
+        </div>
+        <ul class="ticket-list" id="closed-tickets-list">
+        
+        </ul>
+    </section>
 
-</body>
+    <section class="additional-resources">
+        <h2>Additional Resources</h2>
+        <ul>
+        <li><a href="{{ url_for('new_ticket')}}">Submit a New Ticket</a></li>
+        <li><a href="{{ url_for('knowledgebase')}}">Knowledge Base</a></li>
+        <li><a href="#">Contact Support</a></li>
+        </ul>
+    </section>
 
-</html>
+{% endblock %}
+
+{% block scripts %}
+    <script src="../static/js/home.js"></script>
+{% endblock %}

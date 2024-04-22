@@ -1,145 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "sidebar.html" %}
 
-<head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/form.css">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{% block content %}
 
-</html>
-
-<body>
-    <div class="sidebar close">
-        <div class="logo-details">
-            <i class='bx bxl-ok-ru'></i>
-            <span class="logo_name">SSTS</span>
-        </div>
-        <ul class="nav-links">
-
-            <li>
-                <a href="./base.html">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Category</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class='bx bx-edit-alt'></i>
-                    <span class="link_name">Create issue</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Create issue</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class='bx bx-phone'></i>
-                    <span class="link_name">Call</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Call</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class='bx bx-book-open'></i>
-                    <span class="link_name">Ticket</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Ticket</a></li>
-                </ul>
-            </li>
-
-
-            <li>
-                <a href="#">
-                    <i class='bx bx-history'></i>
-                    <span class="link_name">History</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">History</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <!--<img src="image/profile.jpg" alt="profileImg">-->
-                    </div>
-                    <div class="name-job">
-                        <div class="profile_name">Dallon Jarman</div>
-                    </div>
-                    <i class='bx bx-log-out'></i>
-                </div>
-            </li>
-        </ul>
+    <div class="container">
+        <h1>Create a new Issue</h1>
+        <form action="">
+            <div class="form-group">
+                <label for="issueType">Issue Type</label>
+                <select name="issueType" id="issueType">
+                    <option value="ticket">Ticket</option>
+                    <option value="Call">Call</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" placeholder="Enter a title for the issue">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="30" rows="10"
+                    placeholder="Describe issue in detail"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" name="phoneNumber" id="phoneNumber"
+                    placeholder="Enter customer's phone number">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter customers email address">
+            </div>
+            <button type="submit">Create</button>
+        </form>
     </div>
-    
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu'></i>
-        </div>
 
-        <div class="container">
-            <h1>Create a new Issue</h1>
-            <form action="">
-                <div class="form-group">
-                    <label for="issueType">Issue Type</label>
-                    <select name="issueType" id="issueType">
-                        <option value="ticket">Ticket</option>
-                        <option value="Call">Call</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="title" placeholder="Enter a title for the issue">
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10"
-                        placeholder="Describe issue in detail"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" name="phoneNumber" id="phoneNumber"
-                        placeholder="Enter customer's phone number">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Enter customers email address">
-                </div>
-                <button type="submit">Create</button>
-            </form>
-        </div>
-
-
-    </section>
-
-    <script src="../static/js/sidebar.js"></script>
-
-</body>
-
-</html>
+{% endblock %}

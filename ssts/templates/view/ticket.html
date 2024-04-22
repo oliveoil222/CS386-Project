@@ -1,112 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "sidebar.html" %}
 
-<head>
-    <title>View Ticket</title>
-    <link rel="stylesheet" href='../static/css/sidebar.css'>
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{% block head %}
+    <link rel="stylesheet" href="../../static/css/view_ticket.css" />
+{% endblock %}
 
-</html>
+{% block content %}
 
-<body>
-    <div class="sidebar close">
-        <div class="logo-details">
-            <a href="/" style="text-decoration:none"><i class='bx bxl-ok-ru'></i></a>
-            <a href="/" style="text-decoration:none"><span class="logo_name">SSTS</span></a>
-        </div>
-        <ul class="nav-links">
+  <h1>My Tickets</h1>
+  <div id="incident-grid">
+		{% for incident in incidents %}
+			<div class="incident-card">
+				<h2>{{incident.title }}</h2>
+				<p>{{ incident.description }}</p>
+				<button class="edit-btn" data-id="{{ incident.id }}">Edit</button>
+			</div>
+		{% endfor %}
+	</div>
+	
+	<div id="edit-modal" style="display:none;">
+		<h2>Edit Incident</h2>
+		<form>
+			<input type="text" id="incident-name" placeholder="Name">
+			<input type="text" id="incident-description" placeholder="Description">
+			<button id="save-btn">Save</button>
+		</form>
+	</div>
 
-            <li>
-                <a href=" {{ url_for('homepage') }} ">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Dashboard</a></li>
-                </ul>
-            </li>
+{% endblock %}
 
-            <li>
-                <a href=" {{ url_for('new_ticket') }} ">
-                    <i class='bx bx-edit-alt'></i>
-                    <span class="link_name">Create issue</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Create issue</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('view_call') }} ">
-                    <i class='bx bx-phone'></i>
-                    <span class="link_name">Call</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Call</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('view_ticket_list') }} ">
-                    <i class='bx bx-book-open'></i>
-                    <span class="link_name">Ticket</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Ticket</a></li>
-                </ul>
-            </li>
-
-
-            <li>
-                <a href=" {{ url_for('knowledgebase')}} ">
-                    <i class='bx bx-brain'></i>
-                    <span class="link_name">Knowledge Base</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Knowledge Base</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('setting') }} ">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <!--<img src="image/profile.jpg" alt="profileImg">-->
-                    </div>
-                    <div class="name-job">
-                        <div class="profile_name">Dallon Jarman</div>
-                    </div>
-                    <a href=" {{ url_for('agent_login_page') }} ">
-                        <i class='bx bx-log-out'></i>
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu'></i>
-        </div>
-
-    <div class="call-list">
-       <h1>Tickets</h1>
-       <p>Work in progress</p>
-    </div>
-
-</section>
-
-<script src="../static/js/sidebar.js"></script>
-
-</html>
+{% block scripts %}
+    <script src="../../static/js/view_tickets.js"></script>
+{% endblock %}

@@ -6,11 +6,20 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from flask import redirect
+from flask import jsonify
 from markupsafe import escape
 #import grabInfo
 #import addInfo
 
 id_number = "000"
+
+# Sample incident data
+incidents = [
+    {'id': 1, 'title': 'Incident 1', 'description': 'This is incident 1', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': 2, 'title': 'Incident 2', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': 3, 'title': 'Incident 3', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': 4, 'title': 'Incident 4', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+]
 
 def create_app(test_config=None):
     global id_number
@@ -156,25 +165,39 @@ def create_app(test_config=None):
         # either using the list view or the ID number directly.
 
         return render_template("view/ticket", page_name=page_name)
+    
+    @app.route('/view/ticket', methods=['GET'])
+    def view_ticket_list(page_name="View Ticket"):
+        return render_template("view/ticket.html", page_name=page_name, incidents=incidents)
+    
 
-    @app.route('/view/ticket')
-    def view_ticket_list(page_name="View Tickets"):
-        # this will return a list of the past X tickets and render to user
-
-        return render_template("view/ticket.html", page_name=page_name)
-
-    @app.route('/view/ticket/<string:id_number>')
-    def view_ticket(page_name="View Ticket {id_number}"):
-        # may need to be modifed, flask might do something with this
-        # that may be unforeseeable without a bit of testing...
-        # will need a template base for ticket displaying from the frontend.
-        # the rest of the function will take DB functions to get the information.
-
-        # get relevant information on the ticket
-            # includes id number, client email(s), worker email(s)
-            # work notes in reverse order timestamped (last comment first)
-
-        return render_template("view/ticket/{id_number}.html", page_name=page_name)
+    @app.route('/view/ticket/<string:ticket_id>', methods=['GET'])
+    def get_ticket(ticket_id, page_name="Ticket {ticket_id}"):
+        for ticket in incidents:
+            if ticket['id'] == ticket_id:
+                return jsonify
+        return jsonify({'message': 'Ticket not found'}), 404
+    
+    @app.route('/view/ticket/<string:ticket_id>', methods=['PUT'])
+    def update_ticket(ticket_id, page_name="Ticket {ticket_id}"):
+        for ticket in incidents:
+            if ticket['id'] == ticket_id:
+                ticket['title'] = request.json['title']
+                ticket['description'] = request.json['description']
+                return jsonify(ticket)
+        return jsonify({'message': 'Ticket not found'}), 404
+    
+    @app.route('/view/ticket', methods=['POST'])
+    def create_ticket():
+        data = request.get_json()
+        new_ticket = {
+            'id': data['id'],
+            'title': data['title'],
+            'description': data['description']
+        }
+        incidents.append(new_ticket)
+        return jsonify(new_ticket), 201
+    
 
     @app.route('/call')
     def view_call(page_name="Call Home"):

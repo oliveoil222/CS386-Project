@@ -1,0 +1,43 @@
+
+#incident-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 20px;
+}
+
+.incident-card {
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.incident-card h2 {
+	margin-top: 0;
+}
+
+.edit-btn {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#edit-modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#edit-modal form {
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
