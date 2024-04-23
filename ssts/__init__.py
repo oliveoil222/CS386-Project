@@ -15,10 +15,16 @@ id_number = "000"
 
 # Sample incident data
 incidents = [
-    {'id': 1, 'title': 'Incident 1', 'description': 'This is incident 1', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
-    {'id': 2, 'title': 'Incident 2', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
-    {'id': 3, 'title': 'Incident 3', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
-    {'id': 4, 'title': 'Incident 4', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': '001', 'title': 'Incident 1', 'description': 'This is incident 1 and I wonder if I will wreap text correctly or not???', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': '002', 'title': 'Incident 2', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': '003', 'title': 'Incident 3', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': '004', 'title': 'Incident 4', 'description': 'This is incident 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+]
+
+calls = [
+    {'id': '001', 'title': 'Call 1', 'description': 'This is call 1', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': '002', 'title': 'Call 2', 'description': 'This is call 2', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
+    {'id': '003', 'title': 'Call 3', 'description': 'This is call 3', 'worker': 'Dallon', 'device': 'Laptop', 'client': 'John Doe', 'team': 'IT'},
 ]
 
 def create_app(test_config=None):
@@ -159,49 +165,15 @@ def create_app(test_config=None):
             id_number = str(int(id_number) + 1)
         return render_template("new/ticket.html", page_name=page_name, id_number=id_number)
 
-    @app.route('/view')
-    def view_ticket_home(page_name="Ticket Home"):
-        # this will render a page for the user to click between
-        # either using the list view or the ID number directly.
-
-        return render_template("view/ticket", page_name=page_name)
     
     @app.route('/view/ticket', methods=['GET'])
-    def view_ticket_list(page_name="View Ticket"):
+    def view_ticket_list(page_name="View Tickets"):
         return render_template("view/ticket.html", page_name=page_name, incidents=incidents)
     
-
-    @app.route('/view/ticket/<string:ticket_id>', methods=['GET'])
-    def get_ticket(ticket_id, page_name="Ticket {ticket_id}"):
-        for ticket in incidents:
-            if ticket['id'] == ticket_id:
-                return jsonify
-        return jsonify({'message': 'Ticket not found'}), 404
+    @app.route('/view/call', methods=['GET'])
+    def view_call_list(page_name="View Calls"):
+        return render_template("view/call.html", page_name=page_name, calls=calls)
     
-    @app.route('/view/ticket/<string:ticket_id>', methods=['PUT'])
-    def update_ticket(ticket_id, page_name="Ticket {ticket_id}"):
-        for ticket in incidents:
-            if ticket['id'] == ticket_id:
-                ticket['title'] = request.json['title']
-                ticket['description'] = request.json['description']
-                return jsonify(ticket)
-        return jsonify({'message': 'Ticket not found'}), 404
-    
-    @app.route('/view/ticket', methods=['POST'])
-    def create_ticket():
-        data = request.get_json()
-        new_ticket = {
-            'id': data['id'],
-            'title': data['title'],
-            'description': data['description']
-        }
-        incidents.append(new_ticket)
-        return jsonify(new_ticket), 201
-    
-
-    @app.route('/call')
-    def view_call(page_name="Call Home"):
-        return render_template("view/call.html", page_name=page_name)
 
     @app.route('/settings')
     def setting(page_name="Settings"):

@@ -7,24 +7,63 @@
 {% block content %}
 
   <h1>My Tickets</h1>
-  <div id="incident-grid">
+  <div>
 		{% for incident in incidents %}
 			<div class="incident-card">
-				<h2>{{incident.title }}</h2>
+				<h2>{{ incident.title }}</h2>
 				<p>{{ incident.description }}</p>
-				<button class="edit-btn" data-id="{{ incident.id }}">Edit</button>
+				<button class="edit-btn" data-id="{{ incident.id }}" 
+				data-name="{{ incident.title }}"
+				data-description="{{ incident.description }}"
+				data-worker="{{ incident.worker }}"
+				data-device="{{ incident.device }}"
+				data-client="{{ incident.client }}"
+				data-team="{{ incident.team }}"
+				>Edit</button>
 			</div>
 		{% endfor %}
 	</div>
 	
 	<div id="edit-modal" style="display:none;">
-		<h2>Edit Incident</h2>
-		<form>
-			<input type="text" id="incident-name" placeholder="Name">
-			<input type="text" id="incident-description" placeholder="Description">
-			<button id="save-btn">Save</button>
-		</form>
-	</div>
+		<div class="modal-content">
+		  <h2>Edit Incident</h2>
+		  <form>
+			<label for="incident-status">Status:</label>
+			<select id="incident-status">
+				<option value="open">Open</option>
+				<option value="closed">Closed</option>
+			</select>
+			<br>
+
+			<label for="incident-name">Name:</label>
+			<input type="text" id="incident-name" placeholder="Name" >
+			<br>
+
+			<label for="incident-description">Description:</label>
+			<textarea id="incident-description" placeholder="Description"></textarea>
+			<br>
+
+			<label for="incidient-worker">Worker:</label>
+			<input type="text" id="incident-worker" placeholder="Worker">
+			<br>
+
+			<label for="incident-device">Device:</label>
+			<input type="text" id="incident-device" placeholder="Device">
+			<br>
+
+			<label for="incident-client">Client:</label>
+			<input type="text" id="incident-client" placeholder="Client">
+			<br>
+
+			<label for="incident-team">Team:</label>
+			<input type="text" id="incident-team" placeholder="Team">
+			<br>
+
+			<button id="save-btn">Save Changes</button>
+			<button id="cancel-btn">Cancel</button>
+		  </form>
+		</div>
+	  </div>
 
 {% endblock %}
 

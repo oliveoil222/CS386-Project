@@ -1,12 +1,22 @@
 {% extends "sidebar.html" %} 
 
-<!-- {% block head %}
-    <link rel="stylesheet" href="../../static/css/form.css" />
-{% endblock %}  -->
+{% block head %}
+    <link rel="stylesheet" href="../../static/css/view_call.css" />
+{% endblock %} 
 
 {% block content %}
-    <div class="call-list">
-        <h1>Call</h1>
-        <p>Work in progress</p>
+    <h1>My Calls</h1>
+    <div>
+        {% for call in calls %}
+            <div class="call-card">
+                <h2>CALL #{{call.id}}</h2>
+                <p><b>Title: </b>{{call.title }}</p>
+                <p><b>Description: </b>{{call.description }}</p>
+                <p><b>Worker: </b>{{call.worker}}</p>
+                <p><b>Device: </b>{{call.device}}</p>
+                <p><b>Client: </b>{{call.client}}</p>
+                <p><b>Team: </b>{{call.team}}</p>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
