@@ -48,13 +48,11 @@ def get_current_id(collection_name):
 def client_email_find_tickets(client_email):
     # need to go through client database first
         # functions: find_one
-    tickets = client_collection.find_one({'email' : client_email})
+    client = client_collection.find_one({'email' : client_email})
     # get the str version of the tickets 
         # functions: dumps)
-    tickets = dumps(tickets['tickets'])
-    print(tickets)
     # return the list of tickets
-    return tickets
+    return client['tickets']
 
 # create functiont to finf ticket with ticket id
 def ticket_id_find_ticket(ticket_id):
@@ -70,34 +68,29 @@ def ticket_id_find_ticket(ticket_id):
 def worker_id_find_tickets(worker_id):
     # find the worker and only grab the tickets list
         # functions: find_one
-    tickets = worker_collection.find_one({'worker id' : worker_id})
-    # get the str version of the tickets 
-        # functions: dumps
-    tickets = dumps(tickets['tickets'])
+    worker = worker_collection.find_one({'worker id' : worker_id})
     # return the list of tickets assigned to the worker
-    return tickets
+    return worker['tickets']
 
 # create function to find tickets with worker email
 def worker_email_find_tickets(worker_email):
     # find the worker with email and grab the tickets list
         # functions: find_one
-    tickets = worker_collection.find_one({'email' : worker_email})
+    worker = worker_collection.find_one({'email' : worker_email})
     # get the str version of the tickets 
         # functions: dumps
-    tickets = dumps(tickets['tickets'])
     # return the tickets list cursor
-    return tickets
+    return worker['tickets']
 
 # create function to find tickets with team id
 def find_team_tickets(team_id):
     # find the tickets the team has by grabbing the team with matchin id
         # functions: find_one
-    tickets = team_collection.find_one({'team id' : team_id})
+    team = team_collection.find_one({'team id' : team_id})
     # get the str version of the tickets 
         # functions: dumps
-    tickets = dumps(tickets['tickets'])
     # return the list of tickets to the user
-    return tickets
+    return team['tickets']
 
 # create function to find a worker given id
 def find_worker(worker_id):
