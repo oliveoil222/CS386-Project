@@ -9,24 +9,6 @@ connector = db.Connections()
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
     ticket_collection = connector.ticket_collection
-    '''
-    Adds in a row into the ticket collection for a new ticket being input.
-
-    PARAMETERS:
-    > tick_cnt (required) int: the current total of ticket rows that will
-            be input after this ticket
-    > desc (required) string: a string of the description of the ticket
-            issue.
-    > title (required) string: a title for the ticket
-    > type (required) int: the enumerated value of the type the ticket's
-            category falls under
-    > worker (required) string: the worker email who is assigned the ticket
-    > device (required) int: enumerated value of the device's type
-    > client (required) string: the email of the client who submitted the 
-            ticket.
-    > team (required) int: the enumerated value for the team assigned the
-            ticket
-    '''
     # create ticket id
     ticket_id = 't' + str(tick_cnt)
     # create document dictionary to add to the collection
@@ -79,7 +61,7 @@ def add_worker(worker_count, name, email, team, ticket):
 
 def add_team(team_count, worker_ids, tickets, name):
     team_collection = connector.team_collection
-    team_id = 't' + str(team_count)
+    team_id = 'g' + str(team_count)
     # create new document for the new team
     new_team = {
         'team id' : team_id,
@@ -93,7 +75,7 @@ def add_team(team_count, worker_ids, tickets, name):
 def add_device(dev_count, worker, dev_type, tickets, has_problems):
     device_collection = connector.device_collection
     # create device count
-    dev_id = 'd' + dev_count
+    dev_id = 'd' + str(dev_count)
     new_device = {
        'device id' : dev_id,
        'worker' : worker,
@@ -116,7 +98,3 @@ def add_id_tracker(collection_name):
 
     # return the new id tracker document inserted
     return id_tracker_collection.insert_one(new_collection_tracker)
-
-print(add_client(1, 'test@email.com', '9285550000', 't-000', 'd-000', 'text'))
-
-
