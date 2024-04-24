@@ -1,0 +1,28 @@
+{% extends "sidebar.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="../../static/css/edit_ticket.css" />
+    <script source="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h1>Edit Ticket {{ ticket.id }}</h1>
+<form method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ ticket.name }}">
+    <br>
+    <label for="status">Status:</label>
+    <select id="status" name="status">
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+    </select>
+    <br>
+    <input type="submit" value="Save Changes">
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="../../static/js/edit_ticket.js"></script>
+{% endblock %}

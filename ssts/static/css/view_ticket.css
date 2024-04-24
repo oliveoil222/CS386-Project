@@ -1,0 +1,85 @@
+.incident-card {
+	background-color: #f7f7f7;
+	padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-btn {
+	background-color: #0099ff;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 5px;
+  }
+  
+  .edit-btn:hover {
+	background-color: #0077cc;
+  }
+  
+  #edit-modal {
+	position: fixed;
+	top: 10%;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+	background-color: #f7f7f7;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	width: 50%;
+	margin: 0 auto;
+  }
+
+#incident-name,
+#incident-description,
+#incident-status,
+#incident-worker,
+#incident-device,
+#incident-client,
+#incident-team {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+  
+  #save-btn {
+	background-color: #0099ff;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 20px
+  }
+
+  #save-btn:hover {
+	background-color: #0077cc;
+  }
+  
+  #cancel-btn {
+	background-color: #ccc;
+	color: #333;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  
+  #cancel-btn:hover {
+	background-color: #bbb;
+  }
