@@ -192,7 +192,6 @@ class Device:
         # return pymongo id of new document in collection
         return device_collection.insert_one(new_device)
 
-        
 # add class for id trackers
 class ID:
     def __init__(self):
@@ -222,7 +221,6 @@ class ID:
         
     # create init function 
         # connection to id collection
-
 
 
 

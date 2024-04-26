@@ -1,167 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "sidebar.html" %} {% block head %}
+    <link rel="stylesheet" href="../../static/css/form.css" />
+{% endblock %} 
+{% block content %}
 
-<head>
-    <title>Create Incident</title>
-    <link rel="stylesheet" href='../static/css/sidebar.css'>
-    <link rel="stylesheet" href='../static/css/form.css'>
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-    <script>
-        // Function to increment the page number and redirect to the new page
-        function incrementPageNumber() {
-            var pageNumber = parseInt(document.getElementById("page_number").innerText);
-            pageNumber++;
-            document.getElementById("page_number").innerText = pageNumber;
-            // Redirect to the new page
-            window.location.href = "/new/ticket" + pageNumber.toString().padStart(3, '0');
-        }
-    </script>
-    <div class="sidebar close">
-        <div class="logo-details">
-            <a href="/" style="text-decoration:none"><i class='bx bxl-ok-ru'></i></a>
-            <a href="/" style="text-decoration:none"><span class="logo_name">SSTS</span></a>
-        </div>
-        <ul class="nav-links">
-
-            <li>
-                <a href=" {{ url_for('homepage') }} ">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Dashboard</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('new_ticket') }} ">
-                    <i class='bx bx-edit-alt'></i>
-                    <span class="link_name">Create issue</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Create issue</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('view_call') }} ">
-                    <i class='bx bx-phone'></i>
-                    <span class="link_name">Call</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Call</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('view_ticket_list') }} ">
-                    <i class='bx bx-book-open'></i>
-                    <span class="link_name">Ticket</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Ticket</a></li>
-                </ul>
-            </li>
-
-
-            <li>
-                <a href=" {{ url_for('knowledgebase')}} ">
-                    <i class='bx bx-brain'></i>
-                    <span class="link_name">Knowledge Base</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Knowledge Base</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a href=" {{ url_for('setting') }} ">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <!--<img src="image/profile.jpg" alt="profileImg">-->
-                    </div>
-                    <div class="name-job">
-                        <div class="profile_name">Dallon Jarman</div>
-                    </div>
-                    <a href=" {{ url_for('agent_login_page') }} ">
-                        <i class='bx bx-log-out'></i>
-                    </a>
-                </div>
-            </li>
-        </ul>
+<div class="container">
+  <h1>Create a new Issue</h1>
+  <form method="POST">
+    <div class="form-group">
+      <label for="ticketID">Ticket ID</label>
+      <input
+        type="text"
+        name="ticketID"
+        required
+        id="ticketID"
+        value="{{id_number}}"
+        readonly
+      />
     </div>
 
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu'></i>
-        </div>
+    <div class="form-group">
+      <label for="type">Issue Type</label>
+      <select name="issueType" id="issueType">
+        <option value="ticket">Ticket</option>
+        <option value="Call">Call</option>
+      </select>
+    </div>
 
-        <div class="container">
-            <h1>Create a new Issue</h1>
-            <form method="POST">
-                <div class="form-group">
-                    <label for="ticketID">Ticket ID</label>
-                    <input type="text" name="ticketID" required id="ticketID" value="{{id_number}}" readonly>
-                </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        name="title"
+        required
+        id="title"
+        placeholder="Enter a title for the issue"
+      />
+    </div>
 
-                <div class="form-group"> <label for="type">Issue Type</label>
-                    <select name="issueType" id="issueType">
-                        <option value="ticket">Ticket</option>
-                        <option value="Call">Call</option>
-                    </select>
-                </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        name="description"
+        required
+        id="description"
+        cols="30"
+        rows="10"
+        placeholder="Describe issue in detail"
+      >
+      </textarea>
+    </div>
 
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" required id="title" placeholder="Enter a title for the issue">
-                </div>
+    <div class="form-group">
+      <label for="worker">Ticket Worker</label>
+      <input
+        type="text"
+        name="worker"
+        required
+        id="worker"
+        placeholder="Enter the worker's name"
+      />
+    </div>
 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" required id="description" cols="30" rows="10"
-                        placeholder="Describe issue in detail"> </textarea>
-                </div>
+    <div class="form-group">
+      <label for="device">Ticket Device</label>
+      <input
+        type="text"
+        name="device"
+        required
+        id="device"
+        placeholder="Enter the device name"
+      />
+    </div>
 
-                <div class="form-group"> <label for="worker">Ticket Worker</label>
-                    <input type="text" name="worker" required id="worker" placeholder="Enter the worker's name">
-                </div>
+    <div class="form-group">
+      <label for="device">Client</label>
+      <input
+        type="text"
+        name="client"
+        required
+        id="device"
+        placeholder="Enter the device name"
+      />
+    </div>
 
-                <div class="form-group">
-                    <label for="device">Ticket Device</label>
-                    <input type="text" name="device" required id="device" placeholder="Enter the device name">
-                </div>
+    <div class="form-group">
+      <label for="client">Ticket Team</label>
+      <input
+        type="text"
+        name="team"
+        required
+        id="team"
+        placeholder="Enter the team name"
+      />
+    </div>
 
-                <div class="form-group"> <label for="device">Client</label>
-                    <input type="text" name="client" required id="device" placeholder="Enter the device name">
-                </div>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</div>
 
-                <div class="form-group">
-                    <label for="client">Ticket Team</label>
-                    <input type="text" name="team" required id="team" placeholder="Enter the team name">
-                </div>
-
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </div>
-
-
-    </section>
-
-    <script src="../static/js/sidebar.js"></script>
-
-</body>
-
-</html>
+{% endblock %}
