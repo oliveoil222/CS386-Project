@@ -5,6 +5,7 @@ from flask import Flask
 from flask import url_for
 from flask import request
 from flask import render_template
+from flask import redirect
 from markupsafe import escape
 #import grabInfo
 #import addInfo
@@ -71,9 +72,6 @@ def create_app(test_config=None):
     
     @app.route('/signup', methods=['GET','POST'])
     def agent_signup_page(page_name="Agent Signup"):
-        message = ""
-        if "email" in session:
-            return redirect(url_for("/"))
 
         if request.method == 'POST':
             username = str( request.form.get('username') )
@@ -106,7 +104,7 @@ def create_app(test_config=None):
     @app.route('/new/ticket', methods=['GET','POST'])
 
     def new_ticket(id_number=id_number, page_name="New Ticket {id_number}"):
-        global id_number
+
         # will need to save the DB information from the webpage
         # probably using an API request template once the submit button was hit.
         # will need to get the information from front-end about what information
