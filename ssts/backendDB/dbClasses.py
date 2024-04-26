@@ -14,20 +14,6 @@ class Database:
         # add ssts database to database class
         self.db = self.client['ticket_tracker']
 
-    #sign in
-    def user_sign_in(email,password):
-        #define user collection
-        collection = users_collec
-
-        #define user
-        user = user_email
-
-        #check if password is correct
-        if password == user[password]
-            return true
-        else
-            return false
-
 # create class for user
 class User:
     # create init function
@@ -76,7 +62,6 @@ class Ticket:
         }
         # return the document inserted into the ticket collection
         return ticket_collection.insert_one(new_ticket)
-
 
 # create subclass of tickets for solutions
 class Solution:
@@ -134,17 +119,6 @@ class Client:
         }
         # return the new added client pymongo id
         return clients.insert_one(new_client)
-    #option to change password
-    def change_password():
-    #define user type
-    def get_user_type():
-        return 'Client'
-    #get devices from client
-    def get_devices():
-        #query the device collection for devices equal to client
-
-        #return device list
-        return devices
         
         
 # create subclass of users for workers
@@ -170,17 +144,6 @@ class Worker:
         }
         # return the new worker added to the collection
         return worker_collection.insert_one(new_worker)
-
-    #give option to change password
-    def change_password():
-
-    #get user type
-    def get_user_type():
-        return 'Worker'
-
-    #get ticket list
-    def get_tickets():
-        return tickets
             
 # create class for teams
 class Team:
@@ -206,10 +169,6 @@ class Team:
         # return the new team inserted into the team collection
         return team_collection.insert_one(new_team)
 
-    #get tickets
-    def get_tickets:
-        return tickets
-
         
 # create class for devices
 class Device:
@@ -233,13 +192,6 @@ class Device:
         # return pymongo id of new document in collection
         return device_collection.insert_one(new_device)
 
-    #get the tickets
-    def get_tickets():
-
-        #return list of tickets
-        return tickets
-
-        
 # add class for id trackers
 class ID:
     def __init__(self):
@@ -269,7 +221,6 @@ class ID:
         
     # create init function 
         # connection to id collection
- 
 
 
 
