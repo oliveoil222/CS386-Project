@@ -26,15 +26,14 @@ class UserCollection:
         self.password = password
         self.email = email
     # function to add user to database collection
+    # the user variable to input is a Worker/Client object
     def add_user(self, user):
+
         return None
-
-
-class User:
-    def __init__(self, user):
-        self.name = user.name
-        self.email = user.email
-
+    # the user variable to input is a Worker/Client object
+    def find_user(self, user):
+        # query to find a user in the user collection
+        return None
 
 
 # create a class for tickets
@@ -52,6 +51,7 @@ class TicketCollection:
         collection = self.collection
         # create document dictionary to add to the collection
             # the id is made by pymongo so we dont have to do that
+        # create new ticket id for the ticket
         new_ticket = {
             'description': ticket.description,
             'title' : ticket.title,
@@ -61,7 +61,21 @@ class TicketCollection:
         }
         # return the document inserted into the ticket collection
         return collection.insert_one(new_ticket)
-    def get_ticket(worker_email, device_id):
+    
+    def get_ticket(worker_email = None, device_id = None):
+        # check if theres a worker email inputted
+        if worker_email != None and device_id != None:
+            # get query with both attributes
+            return None
+        elif worker_email != None:
+            # get query with only worker email
+            # return list of all tickets with worker email
+            return None
+        # check if theres a device inputted
+        elif device_id != None:
+            # get query with only device id
+            # return list of tickets with device id
+            return None
         return None
 
 class Ticket:
@@ -71,6 +85,10 @@ class Ticket:
         self.device_tyep = type
         self.worker = worker.email
         self.device = device.id_num
+        self.id_num = None
+    def set_id_num(self):
+        # use the ID class to set the id number for the ticket
+        return self.id_num
     
 
 
@@ -105,7 +123,14 @@ class SolutionCollection:
     def get_solutions(self, keywords, worker):
         return None
     
+class Solution:
+    def __init__(self, worker, work_progress, keywords, device):
+        self.worker = worker
+        self.work_progress = work_progress
+        self.keywords = keywords
+        self.device = device
     
+
 # create subclass of users for clients
 class ClientCollection:
     # create init function 
@@ -141,7 +166,14 @@ class ClientCollection:
     def get_worker():
         return None
         
-        
+class Client:
+    def __init__(self, email, name, phone_num, contact_method):
+        self.email = email
+        self.name = name
+        self.phone_num = phone_num
+        self.contact_method = contact_method
+
+
 # create subclass of users for workers
 class WorkerCollection:
     def __init__(self, name, email, team):
@@ -180,6 +212,7 @@ class Worker:
         self.name = name
         self.email = email
         self.team = team
+
 
 # create class for teams
 class TeamCollection:
@@ -261,14 +294,17 @@ class Device:
         self.client = client
         self.operating_sys = os_type
         self.problems = problems
+        self.id_num = None
 
-    def get_worker(self):
-        return None
-    
     def get_client(self):
         return self.client
     
     def get_tickets():
+        #return list of tickets will all attributes in a dictionary format
+
+        return None
+    def get_id_num(self):
+        # use the ID class to get and create an id
         return None
 
 # add class for id trackers
@@ -298,6 +334,8 @@ class ID:
         self.inc_id_count(collection_name)
         # return the id count integer value
         return id_count
+    def add_collection_id():
+        return None
 
         
     # create init function 
