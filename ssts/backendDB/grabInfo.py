@@ -6,7 +6,7 @@ import dbClasses as db
 
 
 # set up connector to database and collections
-connector = db.Connections()
+connector = db.Database()
 
 # doing a dump(cursor) will return the information from the query, the first
 # element in the dictionary is just mongoDBs object id that different for

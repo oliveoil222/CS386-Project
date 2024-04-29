@@ -2,10 +2,10 @@
 import sys
 sys.path.insert(0, './')
 import dbClasses as db
-import updateInfo as update
+#import updateInfo as update
 
 # set up connector to database and collections
-connector = db.Connections()
+connector = db.Database()
 
 def add_ticket(tick_cnt, desc, title, type,  worker, device, client, team):
     ticket_collection = connector.ticket_collection
@@ -89,7 +89,7 @@ def add_device(dev_count, worker, dev_type, tickets, has_problems):
 
 def add_id_tracker(collection_name):
     # connect to database
-    id_tracker_collection = connector.id_tracker_collection
+    id_tracker_collection = connector.db['id_tracker']
     # add new id tracked collection 
     new_collection_tracker = {
         'collection' : collection_name,
@@ -98,3 +98,7 @@ def add_id_tracker(collection_name):
 
     # return the new id tracker document inserted
     return id_tracker_collection.insert_one(new_collection_tracker)
+
+
+print(add_id_tracker('solutions'))
+print(add_id_tracker('users'))
