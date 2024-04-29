@@ -3,163 +3,297 @@ import sys
 sys.path.insert(0, './')
 from bson.json_util import dumps
 import dbClasses as db
-import grabInfo as grab
-import updateInfo as update
-import addInfo as add
 
-connector = db.Connections()
 
-# create class for testing add info
-class TestAddInfo:
+# GLOBAL VARIABLES
+    # team test variables
+TEAM_NAME_1 = 'Test Team 1'
+TEAM_NAME_2 = 'Test Team 2'
+
+    # worker test variables
+WORKER_EMAIL_1 = 'testWorker1@test.com'
+WORKER_NAME_1 = 'Worker 1 Test'
+WORKER_EMAIL_2 = 'testWorker2@test.com'
+WORKER_NAME_2 = 'Worker 2 Test'
+
+    # client test variables
+CLIENT_EMAIL_1 = 'testClient1@test.com'
+CLIENT_NAME_1 = 'Client 1 Test'
+CLIENT_PHONE_1 = '555-0001'
+CLIENT_CONTACT_1 = 'Email'
+CLIENT_EMAIL_2 = 'testClient2@test.com'
+CLIENT_NAME_2 = 'Client 2 Test'
+CLIENT_PHONE_2 = '555-0002'
+CLIENT_CONTACT_2 = 'Phone'
+
+# device test variables
+DEVICE_OP_SYS_1 = 'MacOS'
+DEVICE_PROBLEMS_1 = True
+DEVICE_OP_SYS_2 = 'Windows'
+DEVICE_PROBLEMS_2 = False
+DEVICE_OP_SYS_3 = 'Linux'
+DEVICE_PROBLEMS_3 = True
+
+
+# ticket test variables
+TICKET_DESC_1 = 'Test description 1'
+TICKET_TITLE_1 = 'Test ticket 1'
+TICKET_STATUS_1 = 'open'
+TICKET_DESC_2 = 'Test description 2'
+TICKET_TITLE_2 = 'Test ticket 2'
+TICKET_STATUS_2 = 'open'
+TICKET_DESC_3 = 'Test description 3'
+TICKET_TITLE_3 = 'Test ticket 3'
+TICKET_STATUS_3 = 'open'
+TICKET_DESC_4 = 'Test description 4'
+TICKET_TITLE_4 = 'Test ticket 4'
+TICKET_STATUS_4 = 'open'
+TICKET_DESC_5 = 'Test description 5'
+TICKET_TITLE_5 = 'Test ticket 5'
+TICKET_STATUS_5 = 'open'
+
+# solution variables
+SOLUTION_PROGRESS_1 = ['progress 1 test 1', 'progress 2 test 1']
+SOLUTION_KEYWORDS_1 = ['Test 1']
+SOLUTION_PROGRESS_2 = ['progress 1 test 2', 'progress 2 test 2']
+SOLUTION_KEYWORDS_2 = ['Test 2']
+# test database class
+
+class DatabaseTests:
+    def test_connection():
+        connection = db.Database()
+        assert connection != None
+
+# test client collection and client class
+class ClientTests:
     def __init__(self):
-        self.connection = connector
+        self.collection = db.ClientCollection()
+    def test_add_client(self, client):
+        collection = self.collection
+        # add new client with client collection
+        new_client_1 = collection.add_client(client)
+        print('ADDED CLIENT:', new_client_1)
+        assert new_client_1 != None 
 
-    # function to test the add ticket function
-    def test_add_ticket():
-        # set the ticket cursor
-        ticket_cursor = add.add_ticket(0, 
-                                       'test file', 
-                                       'test ticket', 
-                                       'test type', 
-                                       'tester', 
-                                       'test device', 
-                                       'test client', 
-                                       'test team')
-        
-        # test that the actual and expected values are the same
-        assert ticket_cursor != None
-    #
-    def test_add_client():
-        # set the client cursor
-        client_cursor = add.add_client(0, 
-                                       'test email', 
-                                       'test phone number', 
-                                       '000', 
-                                       '000', 
-                                       'test contact')
-        # check client was added
-        assert client_cursor != None
-
+    def test_get_devices():
+        return None
+    def test_get_tickets():
+        return None
+    def test_get_workers():
+        return None
     
-    def test_add_device():
-        # set the device cursor
-        device_cursor = add.add_device(0, 
-                                       'test worker', 
-                                       'test type', 
-                                       [], 
-                                       True)
-
-        # test the actual values match expected values
-        assert device_cursor != None
-    
-    def test_add_worker():
-        # set the worker cursor
-        worker_cursor = add.add_worker(0, 
-                                       'test worker', 
-                                       'test email', 
-                                       'test team', 
-                                       [])
-        # check the actual values match the expected values
-        assert worker_cursor != None
-
-    def test_add_team():
-        # set the team cursor
-        team_cursor = add.add_team(0, [], [], 'test team')
-        # get list of actual values
-    
-        assert team_cursor != None
-
-    
-# create class for testing grab info
-class TestGrabInfo:
+# test worker collection and worker class
+class WorkerTests:
     def __init__(self):
-        self.connection = connector
-    def test_grab_client_tickets(email, expected_tickets):
-        # set the ticket value
-        tickets_actual = grab.client_email_find_tickets(email)
-        # check the actual tickets match expected tickets
-        assert tickets_actual == expected_tickets
-    def test_find_ticket(ticket_id):
-        # set the actual ticket value
-        ticket_actual = grab.ticket_id_find_ticket(ticket_id)
-        # check the cursor is not none and a ticket was found
-        assert ticket_actual != None
-    def test_worker_tickets(worker_id, expected_tickets):
-        # set the actual worker ticket value
-        tickets_actual = grab.worker_id_find_tickets(worker_id)
-        print(tickets_actual)
-        # check if the actual matches the expected values
-        assert tickets_actual == expected_tickets
-    def test_worker_email_tickets(email, expected_tickets):
-        # set the actual tickets value
-        actual_tickets = grab.worker_email_find_tickets(email)
-        # check if the actual values matches the expected
-        assert actual_tickets == expected_tickets
-    def test_team_tickets(team_id, expected_tickets):
-        # set the value for the actul tickets
-        tickets_actual = grab.find_team_tickets(team_id)
-        # check if the actual values match the expected values
-        assert tickets_actual == expected_tickets
-    def test_find_worker(worker_id):
-        # get the actual value
-        worker_actual = grab.find_worker(worker_id)
-        # check the actual value is not none
-        assert worker_actual != None
-    def test_find_worker_with_email(email):
-        # get the actual value
-        worker_actual = grab.find_worker_with_email(email)
-        # check actual value not none
-        assert worker_actual != None
-    def test_find_device(device_id):
-        # get actal device value
-        device_actual = grab.find_device(device_id)
-        # check the actual value not none
-        assert device_actual != None
-    def test_find_client(client_id):
-        # get actual client value
-        client_actual = grab.find_client(client_id)
-        # check the value is not none
-        assert client_actual != None
+        self.collection = db.WorkerCollection()
+    def test_add_worker(self, worker):
+        collection = self.collection
+        new_worker = collection.add_worker(worker)
+        print('WORKER ADDED:', new_worker)
+        assert new_worker != None
+
+    def test_get_team_workers(self, team):
+        collection = self.collection
+        workers = collection.get_team_workers(team)
+        print('WORKERS IN TEAM', workers)
+        if len(workers) > 0:
+            worker = workers[0]
+        else:
+            worker = None
+        assert worker.email == WORKER_EMAIL_1
+    
+    def test_get_worker(self, worker_email):
+        collection = self.collection
+        worker = collection.get_worker(worker_email)
+        print('WORKER:', worker.email)
+        assert worker.email == worker_email
+
+
+# test user collection and user class
+class UserTests:
+    def __init__(self):
+        self.collection = db.UserCollection()
+    def test_add_user(self, user):
+        collection = self.collection
+        new_user = collection.add_user(user)
+        print('USER:', user)
+        assert new_user != None
+
+# test device collection and device class
+
+# test ticket collection and ticket class
+class TicketTests:
+    def __init__(self):
+        self.collection = db.TicketCollection()
+    def test_add_ticket(self, ticket):
+        collection = self.collection
+        new_ticket = collection.add_ticket(ticket)
+        print('NEW TICKET', new_ticket)
+        assert new_ticket != None
+
+# test solution collection and solution class
+class SolutionTests:
+    def __init__(self):
+        self.collection = db.SolutionCollection()
+    def test_add_solution(self, solution):
+        collection = self.collection
+        new_solution = collection.add_solution(solution)
+        print('NEW SOLUTION', new_solution)
+        assert new_solution != None
+
+# test team collection and team class
+class TeamTests:
+    def __init__(self):
+        self.collection = db.TeamCollection()
+    def test_add_team(self, team):
+        collection = self.collection
+        new_team_1 = collection.add_team(team)
+        print('NEW TEAM', new_team_1)
+        assert new_team_1 != None 
+
+    def test_get_workers(self, team):
+        collection = self.collection
+        workers = collection.get_workers(team)
+        print('TEAM WORKERS:', workers)
+        assert len(workers) > 0
+    
+    def test_get_tickets(self, team):
+        collection = self.collection
+        tickets = collection.get_tickets(team)
+        print('TEAM TICKETS:', tickets)
+        assert len(tickets) > 0
     
 
-# create class for testing update info
-class TestUpdateInfo:
-    def __init__(self):
-        self.connection = connector
-    def test_ticket_worker(email, ticket_id):
-        # get the cursor 
-        ticket_cursor = update.update_ticket_worker(email, ticket_id)
-        # check if expected matches actual
-        assert ticket_cursor != None
-    def test_ticket_team(new_team_id, ticket_id):
-        # get the ticket cursor
-        ticket_cursor = update.update_ticket_team(new_team_id, ticket_id)
-        # check that the actual value matches the expected value
-        assert ticket_cursor != None
 
+def testClasses():
+    TEAM_1 = db.Team(TEAM_NAME_1)
+    TEAM_2 = db.Team(TEAM_NAME_2)
+    print('TEAMS', TEAM_1, TEAM_2)
+    # create worker 1
+    worker_1 = db.Worker(WORKER_NAME_1, 
+                        WORKER_EMAIL_1, 
+                        TEAM_NAME_1)
+    # create worker 2
+    worker_2 = db.Worker(WORKER_NAME_2, 
+                        WORKER_EMAIL_2, 
+                        TEAM_NAME_2)
+    print('WORKERS', worker_1, worker_2)
+    # create client 1
+    client_1 = db.Client(CLIENT_EMAIL_1,
+                         CLIENT_NAME_1,  
+                         CLIENT_PHONE_1,
+                         CLIENT_CONTACT_1)
+    # create client 2
+    client_2 = db.Client(CLIENT_EMAIL_2,
+                        CLIENT_NAME_2,  
+                        CLIENT_PHONE_2,
+                        CLIENT_CONTACT_2)
+    print('CLIENTS', client_1.email, client_2.email)
 
-def testBackend():
-    # test add info
-    TestAddInfo.test_add_ticket()
-    TestAddInfo.test_add_worker()
-    TestAddInfo.test_add_client()
-    TestAddInfo.test_add_team()
-    TestAddInfo.test_add_device()
-    print('add info test passed')
-    # test grab info
-    TestGrabInfo.test_find_client('c1')
-    TestGrabInfo.test_find_device('d-000')
-    TestGrabInfo.test_find_ticket('t1')
-    TestGrabInfo.test_find_worker('w0')
-    TestGrabInfo.test_find_worker_with_email('jdoe@company.com')
-    TestGrabInfo.test_grab_client_tickets('test@email.com', ['t-000'])
-    TestGrabInfo.test_team_tickets('g0', [])
-    TestGrabInfo.test_worker_email_tickets('jdoe@company.com', ['t-000'])
-    TestGrabInfo.test_worker_tickets('w0', 'test ticket')
-    print('grab info tests passed')
-    # test update info
-    TestUpdateInfo.test_ticket_team('g0', 't0')
-    TestUpdateInfo.test_ticket_worker('jdoe@company.com', ['t0'])
-    print('update info tests passed')
+    # user test variables 
+    # create user 1
+    user_1 = db.User(worker_1.name, 
+                    worker_1.email, 
+                    worker_1.user_type)
+    # create user 2
+    user_2 = db.User(client_1.name, 
+                    client_1.email, 
+                    client_1.user_type)
+    print('USERS', user_1, user_2)
+    
+    # create device objects
+    device_1 = db.Device(client_1, 
+                         DEVICE_OP_SYS_1, 
+                         DEVICE_PROBLEMS_1)
+    device_2 = db.Device(client_1, 
+                         DEVICE_OP_SYS_2, 
+                         DEVICE_PROBLEMS_2)
+    device_3 = db.Device(client_2, 
+                         DEVICE_OP_SYS_3, 
+                         DEVICE_PROBLEMS_3)
+    print('DEVICES', device_1, device_2, device_3)
+    
+    # create ticket objects
+    ticket_1 = db.Ticket(TICKET_DESC_1, 
+                         TICKET_TITLE_1,
+                         worker_1, 
+                         device_1, 
+                         TICKET_STATUS_1)
+    ticket_2 = db.Ticket(TICKET_DESC_2, 
+                         TICKET_TITLE_2, 
+                         worker_1, 
+                         device_2, 
+                         TICKET_STATUS_2)
+    ticket_3 = db.Ticket(TICKET_DESC_3, 
+                         TICKET_TITLE_3, 
+                         worker_1, 
+                         device_3, 
+                         TICKET_STATUS_3)
+    ticket_4 = db.Ticket(TICKET_DESC_4, 
+                         TICKET_TITLE_4, 
+                         worker_2, 
+                         device_1, 
+                         TICKET_STATUS_4)
+    ticket_5 = db.Ticket(TICKET_DESC_5, 
+                         TICKET_TITLE_5, 
+                         worker_2, 
+                         device_3, 
+                         TICKET_STATUS_5)
+    print('TICKETS', ticket_1, ticket_2, ticket_3, ticket_4, ticket_5)
+    
+    # solution onjects
+    solution_1 = db.Solution(worker_1.email, 
+                             SOLUTION_PROGRESS_1, 
+                             SOLUTION_KEYWORDS_1,
+                               device_1)
+    solution_2 = db.Solution(worker_2.email, 
+                             SOLUTION_PROGRESS_2, 
+                             SOLUTION_KEYWORDS_2, 
+                             device_2)
+    print('SOLUTIONS:', solution_1, solution_2)
 
-testBackend()
+    # client tests
+    print('CLIENT TESTS')
+    
+    client_test = ClientTests()
+    client_test.test_add_client(client_1)
+    client_test.test_add_client(client_2)
+
+    # worker tests
+    print('WORKER TESTS')
+    worker_test = WorkerTests()
+    #worker_test.test_add_worker(worker_1)
+    #worker_test.test_add_worker(worker_2)
+    worker_test.test_get_worker(worker_1.email)
+    worker_test.test_get_team_workers(TEAM_1.name)
+
+        # User tests
+    print('USER TESTS')
+    user_test = UserTests()
+    user_test.test_add_user(user_1)
+    user_test.test_add_user(user_2)
+
+    # Ticket tests
+    print('TICKET TESTS')
+    ticket_tests = TicketTests()
+    ticket_tests.test_add_ticket(ticket_1)
+    ticket_tests.test_add_ticket(ticket_2)
+    ticket_tests.test_add_ticket(ticket_3)
+    ticket_tests.test_add_ticket(ticket_4)
+    ticket_tests.test_add_ticket(ticket_5)
+
+    # soltution tests
+    print('SOLUTION TESTS')
+    solution_tests = SolutionTests()
+    solution_tests.test_add_solution(solution_1)
+    solution_tests.test_add_solution(solution_2)
+
+    # team tests
+    print('TEAM TESTS')
+    team_tests = TeamTests()
+    team_tests.test_add_team(TEAM_1)
+    team_tests.test_add_team(TEAM_2)
+
+# test backend
+
+testClasses()
