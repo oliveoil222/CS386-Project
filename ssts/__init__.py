@@ -8,8 +8,22 @@ from flask import render_template
 from flask import redirect
 from flask import jsonify
 from markupsafe import escape
+import dbClasses as db
+
 #import grabInfo
 #import addInfo
+
+# backend class collection connections
+USERS = db.UserCollection()
+TICKETS = db.TicketCollection()
+SOLUTIONS = db.SolutionCollection()
+CLIENTS = db.ClientCollection()
+WORKERS = db.WorkerCollection()
+TEAMS = db.TeamCollection()
+DEVICES = db.DeviceCollection()
+IDS = db.ID()
+
+
 
 id_number = "000"
 
@@ -38,10 +52,12 @@ def create_app(test_config=None):
     # pull out the ID number of ticket
     # check database for last number used, if any
     try:
+        id_number = IDS.get_current_id('tickets')
         # do database stuff we expect to work here
         # like pulling last ID number
         # if this errors, then move to except
-        raise ValueError()
+
+
         print("working database stuff here")
         
         # use the get_ticket_collection function
@@ -77,11 +93,12 @@ def create_app(test_config=None):
         if request.method == 'POST':
             email = str(request.form.get('email'))
             password = str(request.form.get('password'))
-            
-            if (email == "testing@ssts.app") & (password == "password"):
+            found_user = WORKERS.get_worker(email)
+            if (found_user!= None) & (email == found_user.email) & (password == found_user.password):
                 return redirect('/')
             else:
                 return redirect('/login')
+
 
         return render_template("auth/login.html", page_name=page_name)
     
@@ -96,16 +113,18 @@ def create_app(test_config=None):
             email = str( request.form.get('email') )
             password = str( request.form.get('password') )
             password1 = str( request.form.get('password1') )
-
-            email_found = False #records.find_one({"email": email})
+            found_user = USERS.find_user(email)
 
             if password != password1:
                 message = "Passwords do not match"
                 return redirect('/signup', message=message) 
-            if email_found:
+            if found_user != None:
                 message = "Email already exists"
                 return redirect('/signup', message=message)
-
+            else:
+                name = firstname + " " + lastname
+                worker = db.Worker(name, email, None, password)
+                WORKERS.add_worker(worker)
         return render_template("auth/signup.html", page_name=page_name)
 
     @app.route('/sp')
