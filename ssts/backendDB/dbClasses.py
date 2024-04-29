@@ -34,25 +34,23 @@ class UserCollection:
         }
         return collection.insert_one(new_user)
     # the user variable to input is a Worker/Client object
-    def find_user(self, user):
-        email = user.email
-        name = user.name
+    def find_user(self, email):
         collection = self.collection
-        found_user = collection.find_one({'email': email, 'name': name})
-        found_user = User(found_user['id'],
-                          found_user['name'],
+        found_user = collection.find_one({'email': email})
+        found_user = User(found_user['name'],
                           found_user['email'],
-                          found_user['type'])
+                          found_user['type'],
+                          found_user['id'])
         # query to find a user in the user collection
         return found_user
 
 class User:
-    def __init__(self, name, email, type):
+    def __init__(self, name, email, type, id_num = None):
         self.collection_name = 'users'
         self.name = name
         self.user_type = type
         self.email = email
-        self.id_num = None
+        self.id_num = id_num
     def set_id_num(self):
         ids = ID()
         # use the ID class to set the id number for the user
@@ -104,7 +102,7 @@ class TicketCollection:
         # update the ticket objects worker email
         ticket.update_worker(worker_email)
         # set query variable to find unique ticket to update
-        ticket_to_update = {'ticket id' : ticket.id_num}
+        ticket_to_update = {'id' : ticket.id_num}
         # set up new value for ticket
         new_ticket_worker = {'$set' : {'worker' : worker_email}}
         # return updated ticket
@@ -117,50 +115,50 @@ class TicketCollection:
         if worker_email != None and device_id != None:
             # get query with both attributes
             for ticket in collection.find({'worker': worker_email, 'decide': device_id}):
-                ticket = Ticket(ticket['id'], 
-                                       ticket['description'], 
+                ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
                                        ticket['type'],
                                        ticket['worker'],
                                        ticket['device'], 
-                                       ticket['status'])
+                                       ticket['status'],
+                                       ticket['id'])
                 tickets.append(ticket)
         elif worker_email != None:
             # get query with only worker email
             for ticket in collection.find({'worker': worker_email}):
-                ticket = Ticket(ticket['id'], 
-                                       ticket['description'], 
+                ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
                                        ticket['type'],
                                        ticket['worker'],
                                        ticket['device'], 
-                                       ticket['status'])
+                                       ticket['status'],
+                                       ticket['id'])
                 tickets.append(ticket)
             
         # check if theres a device inputted
         elif device_id != None:
             # get query with only device id
             for ticket in collection.find({'decide': device_id}):
-                ticket = Ticket(ticket['id'], 
-                                       ticket['description'], 
+                ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
                                        ticket['type'],
                                        ticket['worker'],
                                        ticket['device'], 
-                                       ticket['status'])
+                                       ticket['status'],
+                                       ticket['id'])
                 tickets.append(ticket)
             
             # return list of tickets with device id
         return tickets
 
 class Ticket:
-    def __init__(self, desc, title, worker, device, status = 'open'):
+    def __init__(self, desc, title, worker_email, operate_sys, device_id, status = 'open', id_num = None):
         self.description = desc
         self.title = title
-        self.operating_sys = device.operating_sys
-        self.worker = worker.email
-        self.device = device.id_num
-        self.id_num = None
+        self.operating_sys = operate_sys
+        self.worker = worker_email
+        self.device = device_id
+        self.id_num = id_num
         self.collection_name = 'tickets'
         self.status = status
     def set_id_num(self):
@@ -180,8 +178,6 @@ class Ticket:
         self.worker = worker_email
         return self.worker
 
-    
-
 
 # create subclass of tickets for solutions
 class SolutionCollection:
@@ -190,10 +186,6 @@ class SolutionCollection:
         # connect to solution collection
         database = Database()
         self.collection = database.db['solutions']
-        # create id attribute
-        id_collection = ID()
-        self.id_count = id_collection.grab_info('solutions')
-        # solution info
         # method to add solution
     def add_solution(self, solution):
         # set up connection to solution collection
@@ -206,21 +198,47 @@ class SolutionCollection:
             'worker': solution.worker,
             'work progress' : solution.work_progress,
             'keywords' : solution.keywords,
-            'device': device.id_num
+            'device': solution.device
         }
         # return document pymongo id of new solution
         return solutions.insert_one(new_solution)
             # add team, work progress, keywords, device operating system
-    def get_solutions(self, keywords, worker):
-        return None
+    def get_solutions(self, keywords = None, worker_email = None):
+        collection = self.collection
+        solutions = []
+        if keywords != None and worker_email != None:
+            for solution in collection.find({'worker': worker_email},{'keywords': keywords}):
+                solution = Solution(solution['worker'], 
+                                    solution['work progress'],
+                                    solution['keywords'],
+                                    solution['device'],
+                                    solution['id'])
+                solutions.append(solution)
+        elif worker_email != None:        
+            for solution in collection.find({'worker': worker_email}):
+                solution = Solution(solution['worker'], 
+                                    solution['work progress'],
+                                    solution['keywords'],
+                                    solution['device'],
+                                    solution['id'])
+                solutions.append(solution)
+        elif keywords != None:
+            for solution in collection.find({'keywords': keywords}):
+                solution = Solution(solution['worker'], 
+                                    solution['work progress'],
+                                    solution['keywords'],
+                                    solution['device'],
+                                    solution['id'])
+                solutions.append(solution)
+        return solutions
     
 class Solution:
-    def __init__(self, worker_email, work_progress, keywords, device):
+    def __init__(self, worker_email, work_progress, keywords, device, id_num = None):
         self.worker = worker_email
         self.work_progress = work_progress
         self.keywords = keywords
         self.device = device.id_num
-        self.id_num = None
+        self.id_num = id_num
         self.collection_name = 'solutions'
     def set_id_num(self):
         ids = ID()
@@ -255,24 +273,49 @@ class ClientCollection:
         }
         # return the new added client pymongo id
         return clients.insert_one(new_client)
-    def get_devices():
-        return None
     
-    def get_tickets():
-        return None
+    def get_devices(self, client):
+        device_collection = DeviceCollection()
+        devices = device_collection.get_devices(client.email)
+        return devices
     
-    def get_workers():
-        return None
+    def get_client(self, email):
+        collection = self.collection
+        client = collection.find_one({'email':email})
+        client = Client(client['email'],
+                        client['name'],
+                        client['phone number'],
+                        client['contact method'],
+                        client['id'])
+        return client
+
+    def get_tickets(self, client):
+        devices = self.get_devices(client)
+        device_collection = DeviceCollection()
+        tickets = []
+        for device in devices:
+            device_tickets = device_collection.get_tickets(device)
+            tickets += device_tickets
+        return tickets
+    
+    def get_workers(self, client):
+        devices = self.get_devices(client)
+        device_collection = DeviceCollection()
+        workers = []
+        for device in devices:
+            device_workers = device_collection.get_workers(device)
+            workers += device_workers
+        return workers
         
 class Client:
-    def __init__(self, email, name, phone_num, contact_method):
+    def __init__(self, email, name, phone_num, contact_method, id_num = None):
         self.email = email
         self.name = name
         self.phone_num = phone_num
         self.contact_method = contact_method
         self.collection_name = 'clients'
         self.user_type = 'client'
-        self.id_num = None
+        self.id_num = id_num
     
     def set_id_num(self):
         ids = ID()
@@ -320,15 +363,19 @@ class WorkerCollection:
                         worker['id'])
         return worker
     
-    def update_worker_team(self, team):
-        return None
+    def update_worker_team(self, worker, team):
+        collection = self.collection
+        worker.update_team(team)
+        update_worker = {'id': worker.id_num}
+        new_team = {'$set': {'team': worker.team}}
+        return collection.update_one(update_worker, new_team)
 
 
 class Worker:
-    def __init__(self, name, email, team, id_num = None):
+    def __init__(self, name, email, team_name, id_num = None):
         self.name = name
         self.email = email
-        self.team = team
+        self.team = team_name
         self.collection_name = 'workers'
         self.id_num = id_num
         self.user_type = 'worker'
@@ -340,6 +387,9 @@ class Worker:
         self.id_num = 'worker-' + id_num
         # return the id number
         return self.id_num
+    def update_team(self, new_team):
+        self.team = new_team.name
+        return self.team
 
 
 # create class for teams
@@ -377,12 +427,24 @@ class TeamCollection:
             tickets += worker_tickets
         # return list of tickets
         return tickets
+    def get_team(self, name):
+        collection = self.collection
+        team = collection.find_one({'name': name})
+        team = Team(team['name'], team['id'])
+        return team
+    
+    def update_team_name(self, team, new_name):
+        collection = self.collection
+        team.update_name(new_name)
+        update_team = {'id': team.id_num}
+        new_team_name = {'$set': {'name': new_name}}
+        return collection.update_one(update_team, new_team_name)
     
 class Team:
-    def __init__(self, name):
+    def __init__(self, name, id_num = None):
         self.name = name
         self.collection_name = 'teams'
-        self.id_num = None
+        self.id_num = id_num
     def set_id_num(self):
         ids = ID()
         # use the ID class to set the id number for the team
@@ -391,27 +453,10 @@ class Team:
         self.id_num = 'team-' + id_num
         # return the id number
         return self.id_num
+    def update_name(self, new_name):
+        self.name = new_name
+        return new_name
     
-    def get_workers(self):
-        workers_collection = WorkerCollection()
-        # use worker collection class to find workers in team
-        workers = workers_collection.get_team_workers(self.name)
-        # return list of worker objects of workers in the team
-        return workers
-    
-    def get_tickets(self):
-        # create tickets list
-        tickets = []
-        # get team workers
-        workers = self.get_workers()
-        ticket_collection = TicketCollection()
-        # use ticket collection to get list of ticket objects
-        for worker in workers:
-            
-            worker_tickets = ticket_collection.get_tickets(worker.email, None)
-            # add the worker tickets to the tickets list
-            tickets += worker_tickets
-        return tickets
     
 
         
@@ -420,49 +465,74 @@ class DeviceCollection:
     def __init__(self):
         database = Database()
         self.collection = database.db['devices']
-        # create id attribute
-        id_collection = ID()
-        self.id_count = id_collection.grab_info('teams')
     # method to add device to collection
     def add_device(self, device):
         device_collection = self.collection
         # create device count
-        device.set_id_num
+        device.set_id_num()
         new_device = {
-            'device id' : device.id_num,
+            'id' : device.id_num,
             'client': device.client,
-            'device type' : device.operating_sys,
+            'operating system' : device.operating_sys,
             'problems' : device.problems
         }
         # return pymongo id of new document in collection
         return device_collection.insert_one(new_device)
-    def get_device():
+    def get_devices(self, email):
         # should retunr a Device type after finding query
-        return None
+        collection = self.collection
+        devices = []
+        for device in collection.find({'client': email}):
+            device = Device(device['client'],
+                            device['operating system'], 
+                            device['problems'],
+                            device['id'])
+            devices.append(device)
+        return devices
     
-    def get_worker():
-        return None
+    def get_tickets(self, device):
+        ticket_collection = TicketCollection()
+        tickets = ticket_collection.get_tickets(None, device.id_num)
+        return tickets
     
-    def get_tickets():
-        return None
-    
+    def get_workers(self, device):
+        worker_collection = WorkerCollection()
+        # return list of ticket objects under device
+        tickets = self.get_tickets(device)
+        workers = []
+        for ticket in tickets:
+            if ticket.status != 'closed':
+                worker = worker_collection.get_worker(ticket.worker)
+                worker = Worker(worker['name'],
+                                worker['email'],
+                                worker['team'],
+                                worker['id_num'])
+                workers.append(worker)
+        return workers
+                
     def get_client(self, device):
-        return None
+        clients = ClientCollection()
+        client = clients.get_client(device.client)
+        return client
+    
+    def update_problems(self, device, problems):
+        collection = self.collection
+        device.update_problems(problems)
+        device_to_update = {'id': device.id_num}
+        new_problems = {'$set': {'problems': problems}}
+        return collection.update_one(device_to_update, new_problems)
     
 class Device:
-    def __init__(self, client, os_type, problems = False):
-        self.client = client.email
+    def __init__(self, client_email, os_type, problems = False, id_num = None):
+        self.client = client_email
         self.operating_sys = os_type
         self.problems = problems
-        self.id_num = None
+        self.id_num = id_num
         self.collection_name = 'devices'
 
-    def get_client(self):
-        return self.client
-    
-    def get_tickets():
-        #return list of tickets will all attributes in a dictionary format
-        return None
+    def update_problems(self, problems):
+        self.problems = problems
+        return self.problems
     
     def set_id_num(self):
         ids = ID()
@@ -526,12 +596,3 @@ class ID:
         # return the id count integer value
         return id_count    
 
-'''
-
-users = UserCollection()
-user = User('start', 'start@email.com', 'worker')
-print(users.add_user(user))
-solutions = SolutionCollection()
-solution = Solution('test worker', 'progress', 'keywords', 'device')
-print(solutions.add_solution(solution))
-'''
