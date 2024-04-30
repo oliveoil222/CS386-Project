@@ -7,24 +7,28 @@ import dbClasses as db
 
 # GLOBAL VARIABLES
     # team test variables
+DEVICE_LIST = []
 TEAM_NAME_1 = 'Test Team 1'
 TEAM_NAME_2 = 'Test Team 2'
 
     # worker test variables
 WORKER_EMAIL_1 = 'testWorker1@test.com'
 WORKER_NAME_1 = 'Worker 1 Test'
+WORKER_PASSWORD_1 = 'w0rker1!'
 WORKER_EMAIL_2 = 'testWorker2@test.com'
 WORKER_NAME_2 = 'Worker 2 Test'
-
+WORKER_PASSWORD_2 = 'w0rker2!'
     # client test variables
 CLIENT_EMAIL_1 = 'testClient1@test.com'
 CLIENT_NAME_1 = 'Client 1 Test'
 CLIENT_PHONE_1 = '555-0001'
 CLIENT_CONTACT_1 = 'Email'
+CLIENT_PASSWORD_1 = 'cl13nt1!'
 CLIENT_EMAIL_2 = 'testClient2@test.com'
 CLIENT_NAME_2 = 'Client 2 Test'
 CLIENT_PHONE_2 = '555-0002'
 CLIENT_CONTACT_2 = 'Phone'
+CLIENT_PASSWORD_2 = 'cl13nt2!'
 
 # device test variables
 DEVICE_OP_SYS_1 = 'MacOS'
@@ -151,8 +155,8 @@ class DeviceTests:
     def test_get_devices(self, email):
         collection = self.collection
         devices = collection.get_devices(email)
-        print('DEVICES:', devices)
         assert devices != None 
+        return devices
 
     def test_get_tickets(self, device):
         collection = self.collection
@@ -248,39 +252,47 @@ class TeamTests:
 
 
 def testClasses():
+    device_collection = db.DeviceCollection()
+    device_list = device_collection.get_devices(CLIENT_EMAIL_1)
     TEAM_1 = db.Team(TEAM_NAME_1)
     TEAM_2 = db.Team(TEAM_NAME_2)
     print('TEAMS', TEAM_1, TEAM_2)
     # create worker 1
     worker_1 = db.Worker(WORKER_NAME_1, 
                         WORKER_EMAIL_1, 
-                        TEAM_NAME_1)
+                        TEAM_NAME_1,
+                        WORKER_PASSWORD_1)
     # create worker 2
     worker_2 = db.Worker(WORKER_NAME_2, 
                         WORKER_EMAIL_2, 
-                        TEAM_NAME_2)
+                        TEAM_NAME_2, 
+                        WORKER_PASSWORD_2)
     print('WORKERS', worker_1, worker_2)
     # create client 1
     client_1 = db.Client(CLIENT_EMAIL_1,
                          CLIENT_NAME_1,  
                          CLIENT_PHONE_1,
-                         CLIENT_CONTACT_1)
+                         CLIENT_CONTACT_1,
+                         CLIENT_PASSWORD_1)
     # create client 2
     client_2 = db.Client(CLIENT_EMAIL_2,
                         CLIENT_NAME_2,  
                         CLIENT_PHONE_2,
-                        CLIENT_CONTACT_2)
+                        CLIENT_CONTACT_2, 
+                        CLIENT_PASSWORD_2)
     print('CLIENTS', client_1.email, client_2.email)
 
     # user test variables 
     # create user 1
     user_1 = db.User(worker_1.name, 
                     worker_1.email, 
-                    worker_1.user_type)
+                    worker_1.user_type,
+                    worker_1.password)
     # create user 2
     user_2 = db.User(client_1.name, 
                     client_1.email, 
-                    client_1.user_type)
+                    client_1.user_type,
+                    client_1.password)
     print('USERS', user_1, user_2)
     
     # create device objects
@@ -300,44 +312,34 @@ def testClasses():
                          TICKET_TITLE_1,
                          worker_1.email, 
                          device_1.operating_sys,
-                         device_1.id_num, 
+                         device_list[0].id_num, 
                          TICKET_STATUS_1)
     ticket_2 = db.Ticket(TICKET_DESC_2, 
                          TICKET_TITLE_2, 
                          worker_1.email, 
                          device_2.operating_sys,
-                         device_2.id_num, 
+                         device_list[1].id_num, 
                          TICKET_STATUS_2)
     ticket_3 = db.Ticket(TICKET_DESC_3, 
                          TICKET_TITLE_3, 
                          worker_1.email, 
                          device_3.operating_sys,
-                         device_3.id_num, 
+                         device_list[2].id_num, 
                          TICKET_STATUS_3)
     ticket_4 = db.Ticket(TICKET_DESC_4, 
                          TICKET_TITLE_4, 
                          worker_2.email, 
                          device_1.operating_sys,
-                         device_1.id_num,  
+                         device_list[0].id_num,  
                          TICKET_STATUS_4)
     ticket_5 = db.Ticket(TICKET_DESC_5, 
                          TICKET_TITLE_5, 
                          worker_2.email, 
                          device_3.operating_sys,
-                         device_3.id_num, 
+                         device_list[1].id_num, 
                          TICKET_STATUS_5)
     print('TICKETS', ticket_1, ticket_2, ticket_3, ticket_4, ticket_5)
     
-    # solution onjects
-    solution_1 = db.Solution(worker_1.email, 
-                             SOLUTION_PROGRESS_1, 
-                             SOLUTION_KEYWORDS_1,
-                               device_1)
-    solution_2 = db.Solution(worker_2.email, 
-                             SOLUTION_PROGRESS_2, 
-                             SOLUTION_KEYWORDS_2, 
-                             device_2)
-    print('SOLUTIONS:', solution_1, solution_2)
 
     # device tests
     print('DEVICE TESTS')
@@ -346,7 +348,8 @@ def testClasses():
     device_tests.test_add_device(device_1)
     device_tests.test_add_device(device_2)
     device_tests.test_add_device(device_3)
-    device_tests.test_get_devices(CLIENT_EMAIL_1)
+    device_list = device_tests.test_get_devices(CLIENT_EMAIL_1)
+    print('DEVICE LIST', device_list)
     device_tests.test_get_tickets(device_1)
     device_tests.test_get_workers(device_2)
     device_tests.test_get_client(device_1)
@@ -378,13 +381,12 @@ def testClasses():
     user_test.test_add_user(user_2)
     user_test.test_find_user(CLIENT_EMAIL_1)
 
-    
 
     # Ticket tests
     print('TICKET TESTS')
     ticket_tests = TicketTests()
     ticket_tests.test_add_ticket(ticket_1)
-    #ticket_tests.test_add_ticket(ticket_2)
+    ticket_tests.test_add_ticket(ticket_2)
     ticket_tests.test_add_ticket(ticket_3)
     ticket_tests.test_add_ticket(ticket_4)
     ticket_tests.test_add_ticket(ticket_5)
@@ -392,8 +394,19 @@ def testClasses():
     ticket_tests.test_update_ticket_status(ticket_2, 'closed')
     ticket_tests.test_update_ticket_worker(ticket_3, WORKER_EMAIL_2)
     ticket_tests.test_get_tickets(WORKER_EMAIL_1, None)
-    ticket_tests.test_get_tickets(None, device_1.id_num)
+    print('DEVICE ID:', device_list[0].id_num)
+    ticket_tests.test_get_tickets(None, device_list[0].id_num)
 
+    # solution onjects
+    solution_1 = db.Solution(worker_1.email, 
+                             SOLUTION_PROGRESS_1, 
+                             SOLUTION_KEYWORDS_1,
+                             device_list[0].id_num)
+    solution_2 = db.Solution(worker_2.email, 
+                             SOLUTION_PROGRESS_2, 
+                             SOLUTION_KEYWORDS_2, 
+                             device_list[1].id_num)
+    print('SOLUTIONS:', solution_1, solution_2)
     # soltution tests
     print('SOLUTION TESTS')
     solution_tests = SolutionTests()
@@ -401,7 +414,7 @@ def testClasses():
     solution_tests.test_add_solution(solution_2)
     solution_tests.test_get_solutions(SOLUTION_KEYWORDS_1, None)
     solution_tests.test_get_solutions(None, WORKER_EMAIL_1)
-
+    
     # team tests
     print('TEAM TESTS')
     team_tests = TeamTests()

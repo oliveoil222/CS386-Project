@@ -30,6 +30,7 @@ class UserCollection:
             'id' : user.id_num,
             'name' : user.name,
             'email': user.email,
+            'password': user.password,
             'type' : user.user_type
         }
         return collection.insert_one(new_user)
@@ -40,16 +41,18 @@ class UserCollection:
         found_user = User(found_user['name'],
                           found_user['email'],
                           found_user['type'],
+                          found_user['password'],
                           found_user['id'])
         # query to find a user in the user collection
         return found_user
 
 class User:
-    def __init__(self, name, email, type, id_num = None):
+    def __init__(self, name, email, type, password, id_num = None):
         self.collection_name = 'users'
         self.name = name
         self.user_type = type
         self.email = email
+        self.password = password
         self.id_num = id_num
     def set_id_num(self):
         ids = ID()
@@ -107,7 +110,20 @@ class TicketCollection:
         new_ticket_worker = {'$set' : {'worker' : worker_email}}
         # return updated ticket
         return collection.update_one(ticket_to_update, new_ticket_worker)
-    
+    def get_all_tickets(self):
+        collection = self.collection
+        tickets = []
+        for ticket in collection.find():
+            ticket = Ticket(ticket['description'], 
+                                       ticket['title'], 
+                                       ticket['type'],
+                                       ticket['worker'],
+                                       ticket['device'], 
+                                       ticket['status'],
+                                       ticket['id'])
+            tickets.append(ticket)
+        return tickets
+
     def get_tickets(self, worker_email = None, device_id = None):
         collection = self.collection
         tickets = []
@@ -138,7 +154,7 @@ class TicketCollection:
         # check if theres a device inputted
         elif device_id != None:
             # get query with only device id
-            for ticket in collection.find({'decide': device_id}):
+            for ticket in collection.find({'device': device_id}):
                 ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
                                        ticket['type'],
@@ -190,6 +206,7 @@ class SolutionCollection:
     def add_solution(self, solution):
         # set up connection to solution collection
         solutions = self.collection
+        solution.set_id_num()
         # get solution device object
         device = solution.device
         # add solution to collection of solutions
@@ -233,11 +250,11 @@ class SolutionCollection:
         return solutions
     
 class Solution:
-    def __init__(self, worker_email, work_progress, keywords, device, id_num = None):
+    def __init__(self, worker_email, work_progress, keywords, device_id, id_num = None):
         self.worker = worker_email
         self.work_progress = work_progress
         self.keywords = keywords
-        self.device = device.id_num
+        self.device = device_id
         self.id_num = id_num
         self.collection_name = 'solutions'
     def set_id_num(self):
@@ -256,20 +273,31 @@ class ClientCollection:
     def __init__(self):
         database = Database()
         # connect to client collection
-        self.collection = database.db['client']
+        self.collection = database.db['clients']
+    
+    def add_client_to_users(self, client):
+        users = UserCollection()
+        user = User(client.name, 
+                    client.email, 
+                    client.user_type,
+                    client.password)
+        return users.add_user(user)
     # add client method
     def add_client(self, client):
+        # add client to users
+        self.add_client_to_users(client)
         # set up client collection connection
         clients = self.collection
         # create client id
-
+        client.set_id_num()
         # create a new document for the new client
         new_client = {
             'id' : client.id_num,
             'email' : client.email,
             'name': client.name,
             'phone number' : client.phone_num,
-            'contact method' : client.contact_method
+            'contact method' : client.contact_method,
+            'password': client.password
         }
         # return the new added client pymongo id
         return clients.insert_one(new_client)
@@ -280,12 +308,15 @@ class ClientCollection:
         return devices
     
     def get_client(self, email):
+        # add client to the user collection
+
         collection = self.collection
         client = collection.find_one({'email':email})
         client = Client(client['email'],
                         client['name'],
                         client['phone number'],
                         client['contact method'],
+                        client['password'],
                         client['id'])
         return client
 
@@ -308,13 +339,14 @@ class ClientCollection:
         return workers
         
 class Client:
-    def __init__(self, email, name, phone_num, contact_method, id_num = None):
+    def __init__(self, email, name, phone_num, contact_method, password, id_num = None):
         self.email = email
         self.name = name
         self.phone_num = phone_num
         self.contact_method = contact_method
         self.collection_name = 'clients'
         self.user_type = 'client'
+        self.password = password
         self.id_num = id_num
     
     def set_id_num(self):
@@ -332,8 +364,20 @@ class WorkerCollection:
     # collection connection
         database = Database()
         self.collection = database.db['workers']
+
+    def add_worker_to_users(self, worker):
+        users = UserCollection()
+        user = User(worker.name,
+                    worker.email,
+                    worker.user_type,
+                    worker.password)
+        users.add_user(user)
+        return user
     # add worker to collection
     def add_worker(self, worker):
+        # add worker to user collection
+        self.add_worker_to_users(worker)
+        # add worker to worker collection
         worker_collection = self.collection
         worker.set_id_num()
         # create new document for the new worker
@@ -341,7 +385,8 @@ class WorkerCollection:
             'id' : worker.id_num,
             'name' : worker.name,
             'email' : worker.email,
-            'team' : worker.team
+            'team' : worker.team,
+            'password': worker.password
         }
         # return the new worker added to the collection
         return worker_collection.insert_one(new_worker)
@@ -350,7 +395,11 @@ class WorkerCollection:
         collection = self.collection
         workers = []
         for worker in collection.find({'team': name}):
-            team_worker = Worker(worker['name'], worker['email'], worker['team'])
+            team_worker = Worker(worker['name'], 
+                                 worker['email'], 
+                                 worker['team'],
+                                 worker['password'],
+                                worker['id'])
             workers.append(team_worker)
         return workers
     
@@ -360,6 +409,7 @@ class WorkerCollection:
         worker = Worker(worker['name'],
                         worker['email'], 
                         worker['team'], 
+                        worker['password'],
                         worker['id'])
         return worker
     
@@ -372,13 +422,14 @@ class WorkerCollection:
 
 
 class Worker:
-    def __init__(self, name, email, team_name, id_num = None):
+    def __init__(self, name, email, team_name, password, id_num = None):
         self.name = name
         self.email = email
         self.team = team_name
         self.collection_name = 'workers'
         self.id_num = id_num
         self.user_type = 'worker'
+        self.password = password
     def set_id_num(self):
         ids = ID()
         # use the ID class to set the id number for the worker
@@ -390,7 +441,6 @@ class Worker:
     def update_team(self, new_team):
         self.team = new_team.name
         return self.team
-
 
 # create class for teams
 class TeamCollection:
@@ -589,10 +639,8 @@ class ID:
         collection = self.collection
         # go through id tracker collection and only get ticket id count
         id_count = collection.find_one({'collection' : collection_name}, {'count' : 1})
-        # get the str version of the id count
-        id_count = dumps(id_count['count'])
-        # convert the str to an int
-        id_count = int(id_count)
+        # get the id count
+        id_count = id_count['count']
         # return the id count integer value
         return id_count    
 
