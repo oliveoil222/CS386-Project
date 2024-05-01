@@ -1,5 +1,5 @@
 # mongoDB connections
-ssts/secrets.js
+secrets.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
