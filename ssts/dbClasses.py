@@ -5,8 +5,6 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson.json_util import dumps
 
-#uri = input('mongoDB database connection uri: ')
-#uri = os.environ.get("DATABASE_URL")
 
 # create database class
 class Database:
