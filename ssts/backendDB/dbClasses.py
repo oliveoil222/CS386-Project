@@ -133,7 +133,6 @@ class TicketCollection:
             for ticket in collection.find({'worker': worker_email, 'decide': device_id}):
                 ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
-                                       ticket['type'],
                                        ticket['worker'],
                                        ticket['device'], 
                                        ticket['status'],
@@ -144,7 +143,6 @@ class TicketCollection:
             for ticket in collection.find({'worker': worker_email}):
                 ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
-                                       ticket['type'],
                                        ticket['worker'],
                                        ticket['device'], 
                                        ticket['status'],
@@ -157,7 +155,6 @@ class TicketCollection:
             for ticket in collection.find({'device': device_id}):
                 ticket = Ticket(ticket['description'], 
                                        ticket['title'], 
-                                       ticket['type'],
                                        ticket['worker'],
                                        ticket['device'], 
                                        ticket['status'],
@@ -406,12 +403,15 @@ class WorkerCollection:
     def get_worker(self, worker_email):
         collection = self.collection
         worker = collection.find_one({'email': worker_email})
-        worker = Worker(worker['name'],
-                        worker['email'], 
-                        worker['team'], 
-                        worker['password'],
-                        worker['id'])
-        return worker
+        if worker != None:
+            worker = Worker(worker['name'],
+                            worker['email'], 
+                            worker['team'], 
+                            worker['password'],
+                            worker['id'])
+            return worker
+        else:
+            return None
     
     def update_worker_team(self, worker, team):
         collection = self.collection
@@ -553,10 +553,6 @@ class DeviceCollection:
         for ticket in tickets:
             if ticket.status != 'closed':
                 worker = worker_collection.get_worker(ticket.worker)
-                worker = Worker(worker['name'],
-                                worker['email'],
-                                worker['team'],
-                                worker['id_num'])
                 workers.append(worker)
         return workers
                 
@@ -604,6 +600,7 @@ class ID:
         collection = self.collection
         # get current id count pymongo cursor 
         id_count = self.get_current_id(collection_name)
+        id_count = int(id_count)
         # incriment id count
         new_id_count = id_count + 1
         id_to_update = {'collection' : collection_name}
@@ -640,7 +637,10 @@ class ID:
         # go through id tracker collection and only get ticket id count
         id_count = collection.find_one({'collection' : collection_name}, {'count' : 1})
         # get the id count
-        id_count = id_count['count']
+        id_count = int(id_count['count'])
+        id_num = str(id_count)
+        while len(id_num) < 4:
+            id_num = '0' + id_num
         # return the id count integer value
-        return id_count    
+        return id_num    
 
