@@ -1,16 +1,19 @@
 import pymongo
+import os
+#from dotenv import find_dotenv, load_dotev
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson.json_util import dumps
 
-uri = input('mongoDB database connection uri: ')
 
 # create database class
 class Database:
     # create init function
     def __init__(self):
+        # uri
+        self.uri = os.environ.get("DATABASE_URL")
         # add client to database class
-        self.client = MongoClient(uri, server_api=ServerApi('1'))
+        self.client = MongoClient(self.uri, server_api=ServerApi('1'))
         # add ssts database to database class
         self.db = self.client['ticket_tracker']
 
@@ -643,4 +646,3 @@ class ID:
             id_num = '0' + id_num
         # return the id count integer value
         return id_num    
-
