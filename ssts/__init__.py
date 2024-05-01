@@ -8,7 +8,7 @@ from flask import render_template
 from flask import redirect
 from flask import jsonify
 from markupsafe import escape
-from backendDB import dbClasses as db
+import dbClasses as db
 
 #import grabInfo
 #import addInfo
