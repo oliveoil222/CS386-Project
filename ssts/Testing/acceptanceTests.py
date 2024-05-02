@@ -4,90 +4,117 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from PIL import Image
+import pytest
 #from Screenshot import Screenshot_clipping
 import time
 import sys
 sys.path.insert(0, './')
 
 
-
 service = Service(executable_path="./chromedriver")
 driver = webdriver.Chrome(service=service)
 
-driver.get("https://ssts.app")
-#driver.get("https://ssts.app/new/ticket")
-time.sleep(3)
-create_issue_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-edit-alt']")
-create_issue_icon.click()
-time.sleep(2)
-# test inputting text into title
-title_input_element = driver.find_element(By.ID, "title")
-title_input_element.send_keys('Acceptance Test')
-time.sleep(2)
-# test inputting text into description
-description_input_element = driver.find_element(By.ID, "description")
-description_input_element.send_keys('testing selenium automated acceptance testing for website')
-time.sleep(2)
-#driver.save_screenshot('test1_image.png')
-#screenshot = Image.open('test1_image.png')
-#print(screenshot)
-#screenshot.show()
-# test inputting text into worker 
-worker_input_element = driver.find_element(By.ID, "worker")
-worker_input_element.send_keys('Selenium')
-time.sleep(2)
-# test inputtin device text
-device_input_element = driver.find_element(By.ID, "device")
-device_input_element.send_keys('Automated Test')
-time.sleep(2)
-# test client input
-'''client_input_element = driver.find_element(By.ID, "client")
-client_input_element.send_keys('Selenium Test')'''
-# test team input
 
-team_input_element = driver.find_element(By.ID, "team")
-team_input_element.send_keys('Hannah selenium test')
-time.sleep(2)
+def check_login():
+    driver.get("https://ssts.app/login")
+    username_element = driver.find_element(By.ID, "email")
+    username_element.send_keys("hannahpenado@gmail.com")
+    password_element = driver.find_element(By.ID, "password")
+    password_element.send_keys("1234")
+    sign_in_button = driver.find_element(By.XPATH, ".//form/button[@type='submit']")
+    sign_in_button.click()
+    expected_url = "https://ssts.app/"
+    current_url = driver.current_url
+    assert expected_url == current_url, "sign in url not matching"
 
-submit_button = driver.find_element(By.CLASS_NAME, "btn")
-submit_button.click()
-time.sleep(2)
+def check_create_ticket():
+    create_issue_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-edit-alt']")
+    create_issue_icon.click()
+    # test inputting text into title
+    title_input_element = driver.find_element(By.ID, "title")
+    title_input_element.send_keys('Acceptance Test')
+    # test inputting text into description
+    description_input_element = driver.find_element(By.ID, "description")
+    description_input_element.send_keys('testing selenium automated acceptance testing for website')
+    # test inputting text into worker 
+    worker_input_element = driver.find_element(By.ID, "worker")
+    worker_input_element.send_keys('Selenium')
+    # test inputtin device text
+    device_input_element = driver.find_element(By.ID, "device")
+    device_input_element.send_keys('Automated Test')
+    # test team input
 
-call_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-phone']")
-call_icon.click()
-time.sleep(2)
-
-book_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-book-open']")
-book_icon.click()
-time.sleep(2)
-
-brain_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-brain']")
-brain_icon.click()
-time.sleep(2)
-
-stick_figure_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bxl-ok-ru']")
-stick_figure_icon.click()
-time.sleep(2)
-
-setting_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-cog]")
-setting_icon.click()
-time.sleep(2)
-
-dashboard_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-grid-alt']")
-dashboard_icon.click()
-time.sleep()
-
-menu_bar_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-menu']")
-menu_bar_icon.click()
-time.sleep(2)
+    submit_button = driver.find_element(By.CLASS_NAME, "btn")
+    submit_button.click()
+    expected_url = "https://ssts.app/view/ticket"
+    current_url = driver.current_url
+    assert expected_url == current_url, "Sumbitted ticket url not matching"
 
 
+def check_book_icon():
+    book_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-book-open']")
+    book_icon.click()
+    expected_url = "https://ssts.app/view/ticket"
+    current_url = driver.current_url
+    print(current_url)
+    assert expected_url == current_url, "book icon url not matching"
 
-#driver.save_screenshot('test1_image2.png')
-#screenshot = Image.open('test1_image2.png')
-#print(screenshot)
-#screenshot.show()
 
-time.sleep(20)
+def check_brain_icon():
+    brain_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-brain']")
+    brain_icon.click()
+    expected_url = "https://ssts.app/view/kb"
+    current_url = driver.current_url
+    print(current_url)
+    assert expected_url == current_url, "brain icon url not matching"
 
-#driver.quit()
+
+def check_figure_icon():
+    stick_figure_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bxl-ok-ru']")
+    stick_figure_icon.click()
+    expected_url = "https://ssts.app/"
+    current_url = driver.current_url
+    print(current_url)
+    assert expected_url == current_url, "figure icon url not matching"
+
+def check_setting_icon():
+    setting_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-cog']")
+    setting_icon.click()
+    expected_url = "https://ssts.app/settings"
+    current_url = driver.current_url
+    print(current_url)
+    assert expected_url == current_url, "setting icon url not matching"
+
+def check_dashboard_icon():
+    dashboard_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-grid-alt']")
+    dashboard_icon.click()
+    expected_url = "https://ssts.app/"
+    current_url = driver.current_url
+    print(current_url)
+    assert expected_url == current_url, "dashboard icon url not matching"
+
+def check_new_ticket_icon():
+    create_issue_icon = driver.find_element(By.XPATH, ".//a/i[@class='bx bx-edit-alt']")
+    create_issue_icon.click()
+    expected_url = "https://ssts.app/new/ticket"
+    current_url = driver.current_url
+    print(current_url)
+    assert expected_url == current_url, "new ticket icon url not matching"
+
+
+
+def test_site():
+    check_login()
+    check_new_ticket_icon()
+    check_create_ticket()
+    check_brain_icon()
+    check_book_icon()
+    check_dashboard_icon()
+    check_setting_icon()
+    check_figure_icon()
+
+test_site()
+
+time.sleep(5)
+
+driver.quit()
