@@ -208,12 +208,4 @@ print(users.find())
 
 test_add_client()
 test_add_worker()
-'''
-workers = Database.database.db['workers']
-users = Database.database.db['users']
-clients = Database.database.db['clients']
-users.delete_many({'email': 'mock.client@test.com'})
-clients.delete_many({'email' : 'mock.client@test.com'})
-workers.delete_many({'email' : 'mock.worker@test.com'})
-users.delete_manu({'email' : 'mock.worker@test.com'})
-'''
+
