@@ -344,7 +344,6 @@ def testClasses():
 
     # device tests
     print('DEVICE TESTS')
-    '''
     device_tests = DeviceTests()
     device_tests.test_add_device(device_1)
     device_tests.test_add_device(device_2)
@@ -354,23 +353,23 @@ def testClasses():
     device_tests.test_get_tickets(device_1)
     device_tests.test_get_workers(device_2)
     device_tests.test_get_client(device_1)
-    device_tests.test_update_problems(device_1, False)'''
+    device_tests.test_update_problems(device_1, False)
     # client tests
     print('CLIENT TESTS')
     
     client_test = ClientTests()
-    #client_test.test_add_client(client_1)
-    #client_test.test_add_client(client_2)
-    #client_test.test_get_client(CLIENT_EMAIL_1)
-    #client_test.test_get_devices(client_1)
-    #client_test.test_get_tickets(client_1)
+    client_test.test_add_client(client_1)
+    client_test.test_add_client(client_2)
+    client_test.test_get_client(CLIENT_EMAIL_1)
+    client_test.test_get_devices(client_1)
+    client_test.test_get_tickets(client_1)
     client_test.test_get_workers(client_1)
 
     # worker tests
     print('WORKER TESTS')
     worker_test = WorkerTests()
-    #worker_test.test_add_worker(worker_1)
-    #worker_test.test_add_worker(worker_2)
+    worker_test.test_add_worker(worker_1)
+    worker_test.test_add_worker(worker_2)
     worker_test.test_get_worker(worker_1.email)
     worker_test.test_get_team_workers(TEAM_1.name)
     worker_test.test_update_worker_team(worker_1, TEAM_1)
@@ -378,18 +377,18 @@ def testClasses():
     # User tests
     print('USER TESTS')
     user_test = UserTests()
-    #user_test.test_add_user(user_1)
-    #user_test.test_add_user(user_2)
+    user_test.test_add_user(user_1)
+    user_test.test_add_user(user_2)
     user_test.test_find_user(CLIENT_EMAIL_1)
 
 
     # Ticket tests
     print('TICKET TESTS')
     ticket_tests = TicketTests()
-    #ticket_tests.test_add_ticket(ticket_1)
-    #ticket_tests.test_add_ticket(ticket_2)
-    #ticket_tests.test_add_ticket(ticket_4)
-    #ticket_tests.test_add_ticket(ticket_5)
+    ticket_tests.test_add_ticket(ticket_1)
+    ticket_tests.test_add_ticket(ticket_2)
+    ticket_tests.test_add_ticket(ticket_4)
+    ticket_tests.test_add_ticket(ticket_5)
     ticket_tests.test_update_ticket_status(ticket_1, 'in progress')
     ticket_tests.test_update_ticket_status(ticket_2, 'closed')
     ticket_tests.test_update_ticket_worker(ticket_3, WORKER_EMAIL_2)
