@@ -3,21 +3,14 @@ import pytest
 import pymongo
 
 
-CLIENT = mongomock.MongoClient()
-DB = CLIENT['ssts']
 # create database class
 class Database:
     # create init function
     def __init__(self):
         # get mongomock database
-        self.client = CLIENT
+        self.client = mongomock.MongoClient()
         # create mock database to test
-        self.db = DB
-#test_add_db_data():
-#print(test)
-
-# add ssts database to database class
-#db = client['ticket_tracker']
+        self.db = self.client['ssts']
 
 # create class for user
 class UserCollection:
